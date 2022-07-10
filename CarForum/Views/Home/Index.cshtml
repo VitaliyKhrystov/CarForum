@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model IQueryable<TopicField>
+@model List<TopicField>
 
 <div class="">
     <h2>Car forum Ukraine</h2>
@@ -11,15 +11,11 @@
     <ul>
         @foreach (var topic in Model)
         {
-            <li><a href="#">@topic.QuestionShort</a></li>
+            <li><a asp-controller="Topic" asp-action="Page">@topic.QuestionShort</a></li>
         }
-        <li><a href="#">content 1</a></li>
-        <li><a href="#">content 2</a></li>
-        <li><a href="#">content 3</a></li>
-        <li><a href="#">content 4</a></li>
-        <li><a href="#">content 5</a></li>
+
     </ul>
     <div>
-        <a asp-controller="Topic" asp-action="Index">Add new topic</a>
+        <a asp-controller="Topic" asp-action="Add">Add new topic</a>
     </div>
 </div>

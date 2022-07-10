@@ -12,6 +12,7 @@ namespace CarForum.Domain
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<TopicField> TopicFields { get; set; }
+        public DbSet<Responce> Responces { get; set; }
 
 
     }

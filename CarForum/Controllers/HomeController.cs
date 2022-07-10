@@ -16,16 +16,21 @@ namespace CarForum.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext context;
+        private List<TopicField> topicFields;
 
         public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
             this.context = context;
+            topicFields = new List<TopicField>();
         }
 
         public IActionResult Index()
         {
-            return View();
+            EFTopicField fTopicField = new EFTopicField(context);
+            topicFields = fTopicField.GetTopic().ToList();
+
+            return View(topicFields);
         }
 
         [HttpPost]
@@ -39,7 +44,7 @@ namespace CarForum.Controllers
 
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View();
         }
 
     }

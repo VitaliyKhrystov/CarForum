@@ -9,6 +9,7 @@ namespace CarForum.Domain.Entities
     {
         public int id { get; set; }
         public string Reply { get; set; }
+        public int TopicFieldID { get; set; }
         public TopicField TopicField { get; set; }
     }
 }

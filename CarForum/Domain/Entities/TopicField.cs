@@ -10,8 +10,7 @@ namespace CarForum.Domain.Entities
         public int Id { get; set; }
         public string QuestionShort { get; set; }
         public string QuestionExtension { get; set; }
-        public Responce ResponceId { get; set; }
-        public List<Responce> Responces { get; set; }
+        public List<Responce> Responces { get; set; } = new List<Responce>();
 
     }
 }

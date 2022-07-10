@@ -10,7 +10,7 @@ namespace CarForum.Controllers
     public class TopicController : Controller
     {
         // GET: TopicController
-        public ActionResult Index()
+        public ActionResult Add()
         {
             return View();
         }
