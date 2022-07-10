@@ -1,0 +1,19 @@
+﻿@model TopicField
+@{
+    ViewData["Title"] = "Topic";
+}
+<form asp-controller="Home" asp-action="Create" method="post">
+    <div>
+        <div>
+            <input asp-for="QuestionShort" type="text" />
+            <label asp-for="QuestionShort">Topic</label>
+        </div>
+        <div>
+            <input asp-for="QuestionExtension" type="text" />
+            <label asp-for="QuestionExtension">Write your question</label>
+        </div>
+        <div>
+            <input type="submit" name="name" value="Ask a Question" />
+        </div>
+    </div>
+</form>

@@ -1,6 +1,11 @@
+using CarForum.Domain;
+using CarForum.Domain.Repositories.Abstract;
+using CarForum.Domain.Repositories.EntityFrameWork;
+using CarForum.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,8 +29,12 @@ namespace CarForum
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-        }
 
+            Configuration.Bind("Project", new Config());
+            services.AddDbContext<AppDbContext>(str => str.UseSqlServer(Config.ConnectionString));
+
+            services.AddTransient<ITopicFieldRepository, EFTopicField>();
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
