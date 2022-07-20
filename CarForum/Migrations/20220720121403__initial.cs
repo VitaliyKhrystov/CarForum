@@ -12,8 +12,8 @@ namespace CarForum.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestionShort = table.Column<string>(nullable: true),
-                    QuestionExtension = table.Column<string>(nullable: true)
+                    QuestionShort = table.Column<string>(nullable: false),
+                    QuestionExtension = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -21,35 +21,35 @@ namespace CarForum.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Responce",
+                name: "Responses",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Reply = table.Column<string>(nullable: true),
-                    TopicFieldID = table.Column<int>(nullable: false)
+                    Reply = table.Column<string>(nullable: false),
+                    TopicFieldID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Responce", x => x.id);
+                    table.PrimaryKey("PK_Responses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Responce_TopicFields_TopicFieldID",
+                        name: "FK_Responses_TopicFields_TopicFieldID",
                         column: x => x.TopicFieldID,
                         principalTable: "TopicFields",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Responce_TopicFieldID",
-                table: "Responce",
+                name: "IX_Responses_TopicFieldID",
+                table: "Responses",
                 column: "TopicFieldID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Responce");
+                name: "Responses");
 
             migrationBuilder.DropTable(
                 name: "TopicFields");

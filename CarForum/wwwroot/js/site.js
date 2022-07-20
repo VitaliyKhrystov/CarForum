@@ -1,4 +1,26 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// Expanding the height of the tag Textarea.
+var textarea = document.querySelector('textarea');
 
-// Write your JavaScript code.
+textarea.addEventListener('keydown', autosize);
+
+function autosize() {
+    var el = this;
+    setTimeout(function () {
+        el.style.cssText = 'height:auto; padding:0';
+        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+    }, 0);
+}
+
+// Remove attribute disabled in the input tag.
+
+function checkParams() {
+    var response = $('.page_area_text').val();
+
+    if (response.length != 0) {
+        $('.page_area_submit').removeAttr('disabled');
+    } else {
+        $('.page_area_submit').attr('disabled', 'disabled');
+        $('.error_submit').text('*Fill in the response');
+        
+    }
+}

@@ -1,8 +1,33 @@
-﻿@model TextResponceModel
+﻿@model TopicResponseModel
 @{
     ViewData["Title"] = "Page";
+    int id = Model.TopicField.Id;
+    string Reply = default;
 }
 
-<div>
+<div class="page">
+    <div class="page_topic">
+        <p class="page_topic_short">@Model.TopicField.QuestionShort</p>
+        <p class="page_topic_extension">@Model.TopicField.QuestionExtension</p>
+    </div>
 
+    <div class="page_field">
+        @if (Model.Responces != null)
+        {
+            @foreach (var item in Model.Responces)
+            {
+                 <p class="page_field_extension">@item.Reply</p>
+            }
+        }
+    </div>
+    <div class="page_area">
+        <form asp-controller="Topic" asp-action="Reply" method="post">
+            <input hidden asp-for="@id" />
+
+            <textarea class="page_area_text" rows='1' name="Reply" onkeyup="checkParams()" required></textarea> <br>
+
+            <input class="page_area_submit" type="submit" value="Reponse" />
+
+        </form>
+    </div>
 </div>

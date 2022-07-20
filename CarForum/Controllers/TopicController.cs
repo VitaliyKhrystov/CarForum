@@ -1,5 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CarForum.Domain;
+using CarForum.Domain.Entities;
+using CarForum.Domain.Repositories.Abstract;
+using CarForum.Domain.Repositories.EntityFrameWork;
+using CarForum.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,79 +16,74 @@ namespace CarForum.Controllers
 {
     public class TopicController : Controller
     {
-        // GET: TopicController
+        private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext context;
+        private TopicResponseModel topicResponseModel;
+        private DataManager dataManager;
+        private List<Response> responses;
+        private TopicField topicField { get; set; }
+        private Response response { get; set; }
+
+        public TopicController(ILogger<HomeController> logger, AppDbContext context, DataManager dataManager, TopicResponseModel topicResponseModel)
+        {
+            _logger = logger;
+            this.context = context;
+            this.dataManager = dataManager;
+            this.topicResponseModel = topicResponseModel;
+            responses = new List<Response>();
+        }
         public ActionResult Add()
         {
             return View();
         }
 
-        //// GET: TopicController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
+        public ActionResult Page(int id)
+        {
+            topicField = dataManager.EFTopicFields.GetTopicById(id);
 
-        //// GET: TopicController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+            topicResponseModel.TopicField = topicField;
 
-        //// POST: TopicController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+            foreach (var item in context.Responses)
+            {
+                if (item.TopicFieldID == id)
+                {
+                    responses.Add(item);
+                }
+            }
 
-        //// GET: TopicController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+            topicResponseModel.Responces = responses;
 
-        //// POST: TopicController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+            return View(topicResponseModel);
+        }
+        [HttpPost]
+        public ActionResult Reply(int id, string reply)
+        {
+            topicField = dataManager.EFTopicFields.GetTopicById(id);
 
-        //// GET: TopicController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
+            if (reply != null || reply == string.Empty)
+            {
+                response = new Response() { Reply = reply, TopicField = topicField };
+                dataManager.EFResponses.CreateResponse(response);
+                dataManager.EFResponses.SaveResponse();
+            }
+            else
+            {
+                return Redirect("/Home/Index");
+            }
 
-        //// POST: TopicController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+            topicResponseModel.TopicField = topicField;
+
+           foreach (var item in context.Responses)
+            {
+                if (item.TopicFieldID == id)
+                {
+                    responses.Add(item);
+                }
+            }
+
+            topicResponseModel.Responces = responses;
+
+            return View(topicResponseModel);
+        }
     }
 }

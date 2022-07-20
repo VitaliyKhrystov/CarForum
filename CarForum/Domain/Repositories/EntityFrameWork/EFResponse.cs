@@ -8,50 +8,45 @@ using System.Threading.Tasks;
 
 namespace CarForum.Domain.Repositories.EntityFrameWork
 {
-    public class EFTopicField: ITopicFieldRepository
+    public class EFResponse: IResponseRepository
     {
         private readonly AppDbContext context;
-        public EFTopicField(AppDbContext context)
+        public EFResponse(AppDbContext context)
         {
             this.context = context;
         }
-        public IQueryable<TopicField> GetTopic() 
+        public IQueryable<Response> GetResponse()
         {
-            return context.TopicFields;
+            return context.Responses;
         }
 
-        public async void CreateTopicAsync(TopicField entity)
+        public void CreateResponse(Response entity)
         {
-            await context.TopicFields.AddAsync(entity);
+            context.Responses.Add(entity);
         }
 
-        public async TopicField GetTopicById(int id)
+        public Response GetResponseById(int id)
         {
-            return context.TopicFields.FirstOrDefault(x => x.Id == id);
+            return context.Responses.FirstOrDefault(x => x.Id == id);
         }
 
-        public void UpdateTopic(TopicField entity)
+        public void UpdateResponse(Response entity)
         {
-            //if (entity.Id == default)
-            //    context.Entry(entity).State = EntityState.Added;
-            //else
-            //    context.Entry(entity).State = EntityState.Modified;
-
             context.Entry(entity).State = EntityState.Modified;
         }
 
-        public async void SaveTopicAsync()
+        public void SaveResponse()
         {
-           await context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
-        public void DeleteTopic(int id)
+        public void DeleteResponse(int id)
         {
-            TopicField topicField = context.TopicFields.Find(id);
+            Response response = context.Responses.Find(id);
 
-            if (topicField != null)
+            if (response != null)
             {
-                context.TopicFields.Remove(topicField);
+                context.Responses.Remove(response);
             }
         }
 

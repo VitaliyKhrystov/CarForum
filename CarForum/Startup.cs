@@ -1,18 +1,15 @@
 using CarForum.Domain;
 using CarForum.Domain.Repositories.Abstract;
 using CarForum.Domain.Repositories.EntityFrameWork;
+using CarForum.Models;
 using CarForum.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace CarForum
 {
@@ -34,6 +31,10 @@ namespace CarForum
             services.AddDbContext<AppDbContext>(str => str.UseSqlServer(Config.ConnectionString));
 
             services.AddTransient<ITopicFieldRepository, EFTopicField>();
+            services.AddTransient<IResponseRepository, EFResponse>();
+            services.AddTransient<DataManager>();
+            services.AddTransient<TopicResponseModel>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -3,19 +3,22 @@
 }
 @model List<TopicField>
 
-<div class="">
-    <h2>Car forum Ukraine</h2>
+<div class="forum">
+    <h1 class="forum-title">@Config.CompanyName</h1>
 </div>
-<div class="list">
-    <p>Topics list</p>
-    <ul>
+
+<div class="forum_add">
+    <a class="forum_add_topic" asp-controller="Topic" asp-action="Add">Add new topic</a>
+</div>
+
+<div class="forum_topic">
+    <p class="forum_topic_title">Topics list</p>
+    <ul class="forum_topic_list">
         @foreach (var topic in Model)
         {
-            <li><a asp-controller="Topic" asp-action="Page">@topic.QuestionShort</a></li>
+            <li class="forum_topic_list_li"><a class="forum_topic_list_li_a" asp-controller="Topic" asp-action="Page" asp-route-id="@topic.Id">@topic.QuestionShort</a></li>
         }
 
     </ul>
-    <div>
-        <a asp-controller="Topic" asp-action="Add">Add new topic</a>
-    </div>
 </div>
+

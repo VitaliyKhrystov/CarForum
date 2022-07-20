@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CarForum.Models
 {
-    public class TextResponceModel
+    public class TopicResponseModel
     {
         public TopicField TopicField { get; set; }
-        public string Reply { get; set; }
+        public IEnumerable<Response>  Responces { get; set; }
     }
 }

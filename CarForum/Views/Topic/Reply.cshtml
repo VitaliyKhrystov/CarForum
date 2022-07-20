@@ -1,0 +1,30 @@
+﻿@model TopicResponseModel
+@{
+    ViewData["Title"] = "Reply";
+    int id = Model.TopicField.Id;
+}
+
+<div class="reply">
+
+    <div class="reply_topic">
+        <p class="reply_topic_short">@Model.TopicField.QuestionShort</p>
+        <p class="reply_topic_extension">@Model.TopicField.QuestionExtension</p>
+    </div>
+    
+
+    <div class="reply_field">
+        @foreach (var item in Model.Responces)
+        {
+            <p class="reply_field_extension">@item.Reply</p>
+        }
+    </div>
+
+    <div class="reply_nav">
+        <a asp-controller="Home" , asp-action="Index">Home page</a>
+        <a asp-controller="Topic" asp-action="Page" asp-route-id="@id">Response</a>
+    </div>
+        
+
+</div>
+    
+

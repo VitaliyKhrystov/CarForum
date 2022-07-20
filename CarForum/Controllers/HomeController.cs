@@ -1,5 +1,6 @@
 ﻿using CarForum.Domain;
 using CarForum.Domain.Entities;
+using CarForum.Domain.Repositories.Abstract;
 using CarForum.Domain.Repositories.EntityFrameWork;
 using CarForum.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -16,35 +17,36 @@ namespace CarForum.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext context;
-        private List<TopicField> topicFields;
+        private TopicResponseModel topicResponseModel;
+        private DataManager dataManager;
 
-        public HomeController(ILogger<HomeController> logger, AppDbContext context)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context, DataManager dataManager, TopicResponseModel topicResponseModel)
         {
             _logger = logger;
             this.context = context;
-            topicFields = new List<TopicField>();
+            this.dataManager = dataManager;
+            this.topicResponseModel = topicResponseModel;
         }
 
         public IActionResult Index()
         {
-            EFTopicField fTopicField = new EFTopicField(context);
-            topicFields = fTopicField.GetTopic().ToList();
-
-            return View(topicFields);
+            var topic = new List<TopicField>();
+            topic = dataManager.EFTopicFields.GetTopic().ToList();
+           
+            return View(topic);
         }
 
         [HttpPost]
-        public ActionResult Create(TopicField topicField)
+        public async Task<ActionResult>  Create(TopicField topicField)
         {
-            EFTopicField fTopicField = new EFTopicField(context);
+
            if (ModelState.IsValid)
             {
-                fTopicField.CreateTopic(topicField);
-                fTopicField.SaveTopic();
-
-                return RedirectToAction("Index");
+               await dataManager.EFTopicFields.CreateTopicAsync(topicField);
+               await dataManager.EFTopicFields.SaveTopic();
             }
-            return View();
+
+            return RedirectToAction("Index");
         }
 
     }
