@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Edit Page";
+}
+@model TopicField;
+
+<form asp-controller="Home" asp-action="EditPost" method="post">
+    <div class="topic_edit">
+        <div class="topic_edit_div">
+            <label asp-for="QuestionShort">Topic (short)</label> <span asp-validation-for="QuestionShort" class="attribute_error"></span> <br>
+            <input asp-for="QuestionShort" type="text" maxlength="38" value="@Model.QuestionShort"/> <br>
+
+        </div>
+        <div class="topic_edit_div">
+            <label asp-for="QuestionExtension">Topic (extension)</label> <span asp-validation-for="QuestionExtension" class="attribute_error"></span> <br>
+            <textarea rows='1' asp-for="QuestionExtension" value="@Model.QuestionExtension"></textarea> <br>
+        </div>
+        <div class="topic_edit_div">
+            <input asp-for="@Model.Id" hidden />
+            <input type="submit" value="Save Changes" />
+        </div>
+    </div>
+</form>

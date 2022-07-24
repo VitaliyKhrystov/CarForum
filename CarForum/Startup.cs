@@ -1,4 +1,5 @@
 using CarForum.Domain;
+using CarForum.Domain.Entities;
 using CarForum.Domain.Repositories.Abstract;
 using CarForum.Domain.Repositories.EntityFrameWork;
 using CarForum.Models;
@@ -34,6 +35,8 @@ namespace CarForum
             services.AddTransient<IResponseRepository, EFResponse>();
             services.AddTransient<DataManager>();
             services.AddTransient<TopicResponseModel>();
+            services.AddTransient<TopicField>();
+            services.AddTransient<Response>();
 
         }
 

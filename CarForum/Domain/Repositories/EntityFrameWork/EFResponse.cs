@@ -20,14 +20,14 @@ namespace CarForum.Domain.Repositories.EntityFrameWork
             return context.Responses;
         }
 
-        public void CreateResponse(Response entity)
+        public async Task CreateResponseAsync(Response entity)
         {
-            context.Responses.Add(entity);
+           await context.Responses.AddAsync(entity);
         }
 
-        public Response GetResponseById(int id)
+        public async Task<Response> GetResponseByIdAsync(int id)
         {
-            return context.Responses.FirstOrDefault(x => x.Id == id);
+            return await context.Responses.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public void UpdateResponse(Response entity)
@@ -35,15 +35,13 @@ namespace CarForum.Domain.Repositories.EntityFrameWork
             context.Entry(entity).State = EntityState.Modified;
         }
 
-        public void SaveResponse()
+        public async Task SaveResponseAsync()
         {
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void DeleteResponse(int id)
+        public void DeleteResponse(Response response)
         {
-            Response response = context.Responses.Find(id);
-
             if (response != null)
             {
                 context.Responses.Remove(response);

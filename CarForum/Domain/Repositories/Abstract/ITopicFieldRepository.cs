@@ -1,15 +1,16 @@
 ﻿using CarForum.Domain.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CarForum.Domain.Repositories.Abstract
 {
     public interface ITopicFieldRepository
     {
         IQueryable<TopicField> GetTopic();
-        async void CreateTopicAsync (TopicField entity);
-        async void UpdateTopicAsync (TopicField entity);
-        async TopicField GetTopicByIdAsync(int id);
-        async void SaveTopicAsync();
-        async void DeleteTopicAsync(int id);
+        Task CreateTopicAsync (TopicField entity);
+        void UpdateTopic (TopicField entity);
+        Task<TopicField> GetTopicByIdAsync(int id);
+        Task SaveTopicAsync();
+        void DeleteTopic(TopicField entity);
     }
 }

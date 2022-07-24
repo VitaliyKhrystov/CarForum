@@ -20,38 +20,31 @@ namespace CarForum.Domain.Repositories.EntityFrameWork
             return context.TopicFields;
         }
 
-        public async void CreateTopicAsync(TopicField entity)
+        public async Task CreateTopicAsync(TopicField entity)
         {
             await context.TopicFields.AddAsync(entity);
         }
 
-        public async TopicField GetTopicById(int id)
+        public async Task<TopicField> GetTopicByIdAsync(int id)
         {
-            return context.TopicFields.FirstOrDefault(x => x.Id == id);
+            return await context.TopicFields.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public void UpdateTopic(TopicField entity)
         {
-            //if (entity.Id == default)
-            //    context.Entry(entity).State = EntityState.Added;
-            //else
-            //    context.Entry(entity).State = EntityState.Modified;
-
-            context.Entry(entity).State = EntityState.Modified;
+           context.Entry(entity).State = EntityState.Modified;
         }
 
-        public async void SaveTopicAsync()
+        public async Task SaveTopicAsync()
         {
            await context.SaveChangesAsync();
         }
 
-        public void DeleteTopic(int id)
+        public void DeleteTopic(TopicField entity)
         {
-            TopicField topicField = context.TopicFields.Find(id);
-
-            if (topicField != null)
+             if (entity != null)
             {
-                context.TopicFields.Remove(topicField);
+                context.TopicFields.Remove(entity);
             }
         }
 

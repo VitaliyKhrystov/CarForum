@@ -21,15 +21,17 @@ namespace CarForum.Controllers
         private TopicResponseModel topicResponseModel;
         private DataManager dataManager;
         private List<Response> responses;
-        private TopicField topicField { get; set; }
-        private Response response { get; set; }
+        private TopicField topicField;
+        private Response response;
 
-        public TopicController(ILogger<HomeController> logger, AppDbContext context, DataManager dataManager, TopicResponseModel topicResponseModel)
+        public TopicController(ILogger<HomeController> logger, AppDbContext context, DataManager dataManager, TopicResponseModel topicResponseModel, TopicField  topicField, Response response)
         {
             _logger = logger;
             this.context = context;
             this.dataManager = dataManager;
             this.topicResponseModel = topicResponseModel;
+            this.topicField = topicField;
+            this.response = response;
             responses = new List<Response>();
         }
         public ActionResult Add()
@@ -37,9 +39,9 @@ namespace CarForum.Controllers
             return View();
         }
 
-        public ActionResult Page(int id)
+        public async Task<ActionResult>  Page(int id)
         {
-            topicField = dataManager.EFTopicFields.GetTopicById(id);
+            topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
             topicResponseModel.TopicField = topicField;
 
@@ -56,15 +58,15 @@ namespace CarForum.Controllers
             return View(topicResponseModel);
         }
         [HttpPost]
-        public ActionResult Reply(int id, string reply)
+        public async Task<ActionResult> Reply(int id, string reply)
         {
-            topicField = dataManager.EFTopicFields.GetTopicById(id);
+            topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
             if (reply != null || reply == string.Empty)
             {
                 response = new Response() { Reply = reply, TopicField = topicField };
-                dataManager.EFResponses.CreateResponse(response);
-                dataManager.EFResponses.SaveResponse();
+               await dataManager.EFResponses.CreateResponseAsync(response);
+               await dataManager.EFResponses.SaveResponseAsync();
             }
             else
             {

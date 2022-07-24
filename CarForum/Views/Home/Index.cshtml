@@ -13,12 +13,20 @@
 
 <div class="forum_topic">
     <p class="forum_topic_title">Topics list</p>
-    <ul class="forum_topic_list">
+
         @foreach (var topic in Model)
         {
-            <li class="forum_topic_list_li"><a class="forum_topic_list_li_a" asp-controller="Topic" asp-action="Page" asp-route-id="@topic.Id">@topic.QuestionShort</a></li>
-        }
+            <div class="forum_topic_list">
+                <p class="forum_topic_list_p"><a class="forum_topic_list_p_a" asp-controller="Topic" asp-action="Page" asp-route-id="@topic.Id">@topic.QuestionShort</a></p>
+                <a class="forum_topic_list_edit" asp-controller="Home" asp-action="Edit" asp-route-id="@topic.Id">Edit</a>
 
-    </ul>
-</div>
+                <form class="forum_topic_list_form" asp-action="Delete" asp-route-id="@topic.Id" method="post">
+                    <button class="forum_topic_list_form_submit" type="submit">Delete</button>
+
+                </form>
+             </div>
+
+         }
+
+    </div>
 
