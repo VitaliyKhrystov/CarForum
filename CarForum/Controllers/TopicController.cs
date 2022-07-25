@@ -39,7 +39,7 @@ namespace CarForum.Controllers
             return View();
         }
 
-        public async Task<ActionResult>  Page(int id)
+        public async Task<ActionResult> ReplyAsync(int id)
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
@@ -57,8 +57,10 @@ namespace CarForum.Controllers
 
             return View(topicResponseModel);
         }
+
+       
         [HttpPost]
-        public async Task<ActionResult> Reply(int id, string reply)
+        public async Task<ActionResult> ReplyPostAsync(int id, string reply)
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
@@ -73,19 +75,67 @@ namespace CarForum.Controllers
                 return Redirect("/Home/Index");
             }
 
-            topicResponseModel.TopicField = topicField;
+           // topicResponseModel.TopicField = topicField;
 
-           foreach (var item in context.Responses)
+           //foreach (var item in context.Responses)
+           // {
+           //     if (item.TopicFieldID == id)
+           //     {
+           //         responses.Add(item);
+           //     }
+           // }
+
+           // topicResponseModel.Responces = responses;
+
+            //return View(topicResponseModel);
+
+            int ID = topicField.Id;
+
+
+            return RedirectToAction("Page", "Topic", new { id = ID });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EditAsync(int id)
+        {
+            response = await dataManager.EFResponses.GetResponseByIdAsync(id);
+            topicResponseModel.Responces = new List<Response>() { response };
+
+            foreach (var item in context.TopicFields.ToList())
             {
-                if (item.TopicFieldID == id)
+                if (item.Id == response.TopicFieldID)
                 {
-                    responses.Add(item);
+                    topicResponseModel.TopicField = item;
                 }
             }
 
-            topicResponseModel.Responces = responses;
-
             return View(topicResponseModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditPostAsync(Response _response)
+        {
+
+            dataManager.EFResponses.UpdateResponse(_response);
+            await dataManager.EFResponses.SaveResponseAsync();
+
+            int ID = _response.TopicFieldID;
+
+            return RedirectToAction("Page", "Topic", new { id = ID });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteAsync(int id)
+        {
+            response = await dataManager.EFResponses.GetResponseByIdAsync(id);
+            dataManager.EFResponses.DeleteResponse(response);
+            await dataManager.EFResponses.SaveResponseAsync();
+
+            int ID = response.TopicFieldID;
+
+
+            return RedirectToAction("Page", "Topic", new { id = ID });
+
         }
     }
 }

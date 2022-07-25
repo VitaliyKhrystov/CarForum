@@ -27,7 +27,7 @@ namespace CarForum.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Reply = table.Column<string>(nullable: false),
-                    TopicFieldID = table.Column<int>(nullable: true)
+                    TopicFieldID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,7 +37,7 @@ namespace CarForum.Migrations
                         column: x => x.TopicFieldID,
                         principalTable: "TopicFields",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

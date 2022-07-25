@@ -12,7 +12,7 @@ namespace CarForum.Domain.Entities
 
         [Required(ErrorMessage = "Response not specified!")]
         public string Reply { get; set; }
-        public int? TopicFieldID { get; set; }
+        public int TopicFieldID { get; set; }
         public TopicField TopicField { get; set; }
     }
 }

@@ -15,7 +15,13 @@
         {
             @foreach (var item in Model.Responces)
             {
-                 <p class="page_field_extension">@item.Reply</p>
+        <div>
+            <p class="page_field_extension">@item.Reply</p>
+            <a class="page_field_edit" asp-controller="Topic" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <form class="page_field_form" asp-action="Delete" asp-route-id="@item.Id" method="post">
+                <button class="page_field_form_submit" type="submit">Delete</button>
+            </form>
+        </div>
             }
         }
     </div>
