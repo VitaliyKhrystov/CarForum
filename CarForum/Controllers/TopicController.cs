@@ -75,24 +75,9 @@ namespace CarForum.Controllers
                 return Redirect("/Home/Index");
             }
 
-           // topicResponseModel.TopicField = topicField;
-
-           //foreach (var item in context.Responses)
-           // {
-           //     if (item.TopicFieldID == id)
-           //     {
-           //         responses.Add(item);
-           //     }
-           // }
-
-           // topicResponseModel.Responces = responses;
-
-            //return View(topicResponseModel);
-
             int ID = topicField.Id;
 
-
-            return RedirectToAction("Page", "Topic", new { id = ID });
+            return RedirectToAction("Reply", "Topic", new { id = ID });
         }
 
         [HttpGet]
@@ -121,7 +106,7 @@ namespace CarForum.Controllers
 
             int ID = _response.TopicFieldID;
 
-            return RedirectToAction("Page", "Topic", new { id = ID });
+            return RedirectToAction("Reply", "Topic", new { id = ID });
         }
 
         [HttpPost]
@@ -134,7 +119,7 @@ namespace CarForum.Controllers
             int ID = response.TopicFieldID;
 
 
-            return RedirectToAction("Page", "Topic", new { id = ID });
+            return RedirectToAction("Reply", "Topic", new { id = ID });
 
         }
     }

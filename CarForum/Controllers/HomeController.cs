@@ -1,13 +1,9 @@
 ﻿using CarForum.Domain;
 using CarForum.Domain.Entities;
-using CarForum.Domain.Repositories.Abstract;
-using CarForum.Domain.Repositories.EntityFrameWork;
 using CarForum.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,8 +28,7 @@ namespace CarForum.Controllers
 
         public IActionResult Index()
         {
-            var topic = new List<TopicField>();
-            topic = dataManager.EFTopicFields.GetTopic().ToList();
+            var topic = dataManager.EFTopicFields.GetTopic().ToList();
 
             return View(topic);
         }

@@ -5,8 +5,26 @@
                 <li><a href="/">About us</a></li>
                 <li><a href="/">Contacts</a></li>
             </ul>
-            <ul>
-                <li></li>
+            <ul class="header_nav_right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    string name = User.Identity.Name;
+                    int index = name.IndexOf("@");
+                    int interval = name.Length - index;
+                    name = name.Remove(index, interval);
+
+                    <li>@name</li>
+                    <li>
+                        <form asp-controller="Account" asp-action="Logout" method="post">
+                            <input class="header_nav_right_exit" type="submit" name="name" value="Exit" />
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li><a class="header_nav_right_login" asp-controller="Account" asp-action="Login">Login</a></li>
+                    <li><a class="header_nav_right_register" asp-controller="Account" asp-action="Register">Register</a></li>
+                }
             </ul>
     </nav>
 </header>

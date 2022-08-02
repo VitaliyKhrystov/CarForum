@@ -6,6 +6,7 @@ using CarForum.Models;
 using CarForum.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,12 @@ namespace CarForum
 
             Configuration.Bind("Project", new Config());
             services.AddDbContext<AppDbContext>(str => str.UseSqlServer(Config.ConnectionString));
+
+            services.AddIdentity<User, IdentityRole>( options => 
+                                                    {
+                                                        options.Password.RequiredLength = 10;
+                                                    })
+                                                    .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddTransient<ITopicFieldRepository, EFTopicField>();
             services.AddTransient<IResponseRepository, EFResponse>();
@@ -57,6 +64,7 @@ namespace CarForum
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

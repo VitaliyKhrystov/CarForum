@@ -1,4 +1,6 @@
-﻿* {
+﻿*, 
+*::before, 
+*::after {
     margin: 0;
     padding: 0;
     font-family: 'DM Sans', sans-serif;
@@ -9,50 +11,71 @@
 /*Header*/
 
 header {
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 75px;
     background-color: black;
     color: white;
 }
 .header_nav {
-
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 200px;
 }
 .header_nav_left,
 .header_nav_right {
-  
-    display: inline-block;
-    margin: 40px 0 0 200px;
+    display: flex;
+    margin-top: 40px;
+    align-items: center;
 }
 
-.header_nav_right {
-    margin:0;
+.header_nav_right_exit {
+    background-color: inherit;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 3px 10px;
+}
+
+.header_nav_right_exit:hover {
+    color: aqua;
+    border: 1px dashed aqua;
 }
 
 li {
     list-style-type: none;
 }
 .header_nav_left li, .header_nav_right li {
-    display: inline-block;
     padding-right: 25px;
 }
 
 a {
     text-decoration: none;
 }
-.header_nav_left a, 
-.header_nav_rigth a {
-   color: white;
+.header_nav_left a,
+.header_nav_right_login,
+.header_nav_right_register,
+.login_nav_register {
+    color: white;
 }
 
 .header_nav_left a:hover,
+.header_nav_right_login:hover,
+.header_nav_right_register:hover,
 .topic_add_div:last-child input:hover,
 .topic_edit_div:last-child input:hover,
 .forum_add_topic:hover,
 .forum_topic_list,
-.forum_topic_list_p_a:hover,
+.forum_topic_list_div_a:hover,
 .forum_topic_list_edit:hover,
-.reply_nav a:hover,
-.page_area_submit:hover {
+.reply_nav_homepage:hover,
+.reply_nav_submit:hover,
+.edit_form_submit:hover,
+.register_submit_input:hover,
+.login_nav_submit:hover,
+.login_nav_register:hover {
     color: aqua;
 }
 
@@ -84,7 +107,8 @@ a {
 .topic_add,
 .topic_edit,
 .reply,
-.page {
+.register,
+.login {
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
@@ -106,7 +130,8 @@ a {
 
 .topic_add_div textarea,
 .topic_edit_div textarea,
-.page_area_text {
+.reply_area_text,
+.edit_form_response {
     overflow: hidden;
     width: 50%;
     padding: 0 5px;
@@ -128,7 +153,8 @@ a {
 .forum_add {
     border: 5px solid grey;
     border-style: inset;
-    width: 220px;
+    border-radius: 10px;
+    width: 210px;
     text-align: center;
 }
 
@@ -147,13 +173,12 @@ a {
 }
 
 .forum_topic_list {
-   display: flex;
-   flex-direction: row;
-   align-content:center;
-   margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.forum_topic_list_p {
+.forum_topic_list_div {
     padding: 3px 3px 3px 20px;
     border: 5px solid grey;
     border-style: inset;
@@ -162,21 +187,19 @@ a {
     color: white;
 }
 
-.forum_topic_list_p_a {
+.forum_topic_list_div_a {
     color: white;
 }
 
-.forum_topic_list_edit {
+.forum_topic_list_edit,
+.reply_field_edit {
     margin: 0 20px;
-    padding-top: 9px;
     color: white;
 }
 
-.forum_topic_list_form {
-
-}
-
-.forum_topic_list_form_submit {
+.forum_topic_list_form_submit,
+.reply_field_form_submit,
+.login_nav_submit {
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
@@ -184,18 +207,29 @@ a {
     color: white;
     padding: 3px;
 }
-.forum_topic_list_form_submit:hover {
+
+.forum_topic_list_form_submit:hover,
+.reply_field_form_submit:hover {
     color: #F73697;
 }
-    /*Reply*/
-    .reply_topic,
-    .reply_nav,
-    .page_topic,
-    .reply_field,
-    .page_field,
-    .page_area {
-        margin: 20px 20px 0 20px;
-    }
+
+/*Reply*/
+
+.reply{
+    display:flex;
+    flex-direction:column;
+}
+
+.reply_topic,
+.reply_field,
+.reply_area {
+    margin: 20px 20px 0 20px;
+}
+
+.reply_field_list {
+    display: flex;
+    align-items: center;
+}
 
 .reply_topic_short,
 .reply_topic_extension {
@@ -208,10 +242,9 @@ a {
     width: 100%;
 }
 
-.reply_field_extension,
-.page_field_extension {
+.reply_field_extension {
     margin: 10px 0;
-    width: 100%;
+    width: 80%;
     color: black;
     background-color: white;
     border: 5px solid grey;
@@ -220,33 +253,45 @@ a {
     padding: 5px;
 }
 
-.reply_nav {
-    margin-bottom: 30px;
+.reply_area_text,
+.edit_form_response {
+    width: 100%;
 }
 
-.reply_nav a,
-.page_area_submit {
+.reply_area_text:invalid,
+.edit_form_response:invalid{
+    border-color: red;
+}
+
+.reply_nav {
+    margin: 20px 0 30px 0;
+}
+
+.reply_nav_submit,
+.reply_nav_homepage,
+.edit_form_submit {
     color: white;
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
-    width: 220px;
-    padding: 5px;
-    margin-right: 20px;
-}
-
-/*Page*/
-.page_area_text{
-    width: 100%;
-}
-.page_area_text:invalid {
-    border-color: red;
-}
-
-.page_area_submit{
     background-color: transparent;
-    margin: 20px 0;
 }
+
+
+.reply_nav_submit {
+    width: 190px;
+}
+.reply_nav_homepage {
+    margin-left: 20px;
+    padding: 6px 25px;
+}
+
+/*Edit*/
+.edit_form_submit {
+    margin-top: 30px;
+    width: 150px;
+}
+
 /*Footer*/
 footer {
     width: 100%;
@@ -256,7 +301,77 @@ footer {
     text-align: center;
 }
 
-/*Attribute error*/
+/*Register*/
+
+.register_h1,
+.login_h1 {
+    margin: 25px 0 20px 20px;
+}
+
+.register_email,
+.register_password,
+.register_password_confirm,
+.login_email,
+.login_password {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 15px 20px;
+}
+
+.register_email_input,
+.register_password_input,
+.register_password_confirm_input,
+.login_email_input,
+.login_password_input,
+.login_nav_register {
+    width: 50%;
+    border: 5px solid grey;
+    border-style: inset;
+    border-radius: 10px;
+}
+
+.register_submit {
+    margin: 30px 0 25px 20px;
+}
+
+.register_submit_input {
+    border: 5px solid grey;
+    background-color: grey;
+    border-radius: 10px;
+    color: white;
+    border-style: inset;
+    width: 180px;
+}
+
+/*Login*/
+.login_remember {
+    margin: 20px 0 15px 20px;
+}
+
+.login_remember_input {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+}
+
+.login_nav {
+    margin: 20px 0 15px 20px;
+}
+
+.login_nav_submit {
+    width: 180px;
+    margin-right: 20px;
+}
+
+.login_nav_register {
+   padding: 8px 38px;
+}
+
+.login_nav_register:hover {
+    text-decoration: none;
+}
+
+/*Validation error*/
 .attribute_error,
 .error_submit {
     font-size: inherit;
@@ -267,5 +382,4 @@ footer {
 .error_submit {
     margin-left: 0;
 }
-
 

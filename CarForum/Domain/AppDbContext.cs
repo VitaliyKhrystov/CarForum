@@ -1,13 +1,11 @@
 ﻿using CarForum.Domain.Entities;
+using CarForum.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CarForum.Domain
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -16,6 +14,8 @@ namespace CarForum.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<TopicField>()
                         .HasMany(r => r.Responces)
                         .WithOne(t => t.TopicField)

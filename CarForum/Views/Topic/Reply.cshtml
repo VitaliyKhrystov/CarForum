@@ -5,32 +5,37 @@
 }
 
 <div class="reply">
-
     <div class="reply_topic">
         <p class="reply_topic_short">@Model.TopicField.QuestionShort</p>
         <p class="reply_topic_extension">@Model.TopicField.QuestionExtension</p>
     </div>
-    
 
     <div class="reply_field">
-        @foreach (var item in Model.Responces)
+        @if (Model.Responces != null)
         {
-        <div>
-            <p class="reply_field_extension">@item.Reply</p>
-            @*<a class="reply_field_edit" asp-controller="Topic" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-            <form class="reply_field_form" asp-action="Delete" asp-route-id="@item.Id" method="post">
-                <button class="reply_field_form_submit" type="submit">Delete</button>
-            </form>*@
-        </div>
+            @foreach (var item in Model.Responces)
+            {
+            <div class="reply_field_list">
+                <p class="reply_field_extension">@item.Reply</p>
+                <a class="reply_field_edit" asp-controller="Topic" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <form class="reply_field_form" asp-action="Delete" asp-route-id="@item.Id" method="post">
+                    <button class="reply_field_form_submit" type="submit">Delete</button>
+                </form>
+            </div>
+            }
         }
     </div>
+    <div class="reply_area">
+        <form asp-controller="Topic" asp-action="ReplyPost" method="post">
+            <input hidden asp-for="@id" />
 
-    <div class="reply_nav">
-        <a asp-controller="Home" , asp-action="Index">Home page</a>
-        <a asp-controller="Topic" asp-action="Page" asp-route-id="@id">Response</a>
+            <textarea class="reply_area_text" rows='1' name="Reply" onkeyup="checkParams()" required></textarea> <br>
+
+            <div class="reply_nav">
+                <input class="reply_nav_submit" type="submit" value="Reponse" />
+                <a class="reply_nav_homepage" asp-controller="Home" , asp-action="Index">Home page</a>
+            </div>
+
+        </form>
     </div>
-        
-
 </div>
-    
-

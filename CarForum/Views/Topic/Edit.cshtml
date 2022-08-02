@@ -20,10 +20,10 @@
 
     }
 <form class="edit_form" asp-controller="Topic" asp-action="EditPost" method="post">
-    <textarea class="edit_form_response" rows='1' asp-for="@reply" placeholder="reply" onkeyup="checkParams()" required></textarea> <br>
+    <textarea class="edit_form_response" rows='1' asp-for="@reply" placeholder="" onkeyup="checkParams()" required></textarea> <br>
     <input asp-for="@ID" hidden />
     <input asp-for="@topicFieldID" hidden />
-    <input class="edit_form_submit" type="submit" value="Save Changes" />
+    <input class="edit_form_submit" type="submit" value="Save" />
 </form>
 
 </div>

@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+@model RegisterViewModel
+
+<div class="register" >
+    <h1 class="register_h1">Registration</h1>
+    <div class="attribute_error" asp-validation-summary="All"></div>
+    <form asp-controller="Account" asp-action="Register" method="post">
+        <div class="register_email">
+            <label class="register_email_label" asp-for="Email">Email</label>
+            <span class="attribute_error" asp-for="Email" asp-validation-for="Email"></span>
+            <input class="register_email_input" type="text" asp-for="Email" />
+        </div>
+        <div class="register_password">
+            <label class="register_password_label" asp-for="Password">Password</label>
+            <span class="attribute_error" asp-validation-for="Password"></span>
+            <input class="register_password_input" type="text" asp-for="Password" />
+        </div>
+        <div class="register_password_confirm">
+            <label class="register_password_confirm_label" asp-for="PasswordConfirm">Confirm password</label>
+            <span class="attribute_error" asp-validation-for="PasswordConfirm"></span>
+            <input class="register_password_confirm_input" type="text" asp-for="PasswordConfirm" />
+        </div>
+        <div class="register_submit">
+            <input class="register_submit_input" type="submit" name="name" value="Register" />
+        </div>
+    </form>
+</div>
