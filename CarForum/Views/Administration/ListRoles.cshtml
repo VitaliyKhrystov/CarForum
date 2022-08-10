@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "List Roles";
+}
+@model IEnumerable<IdentityRole>
+
+<div class="listRole">
+    <h1 class="listRole_h1">List Roles</h1>
+
+    <div class="listRole_createRole">
+        <a class="listRole_createRole_link" asp-controller="Administration" asp-action="CreateRole">Create Role</a>
+    </div>
+  
+
+
+    @if (Model.Any())
+    {
+
+        @foreach (IdentityRole role in Model)
+        {
+            <div class="listRole_box">
+                <div class="listRole_box_role">
+                    <p class="listRole_box_id">Id: @role.Id</p>
+                    <p class="listRole_box_name">@role.Name</p>
+                </div>
+
+                <div class="listRole_box_action">
+                    <a class="listRole_box_action_edit" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
+                    <form class="listRole_box_action_delete" method="post">
+                        <input class="listRole_box_action_delete_submit" type="submit" asp-controller="Administration" asp-action="Delete" asp-route-id="@role.Id" value="Delete" />
+                    </form>
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <div class="role_message">No rules created yet</div>
+    }
+
+</div>
+

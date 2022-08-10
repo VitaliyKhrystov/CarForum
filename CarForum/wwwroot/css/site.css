@@ -1,27 +1,35 @@
-﻿*, 
-*::before, 
+﻿*,
+*::before,
 *::after {
     margin: 0;
     padding: 0;
     font-family: 'DM Sans', sans-serif;
     font-family: 'Montserrat', sans-serif;
+  /*  font-family: 'Catamaran', sans-serif;*/
 }
 
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-flow: column;
+}
 
 /*Header*/
 
 header {
-    display: flex;
+    flex: 0 1 75px;
     justify-content: center;
     width: 100%;
-    height: 75px;
     background-color: black;
     color: white;
 }
 .header_nav {
     display: flex;
     justify-content: space-between;
-    width: 100%;
     margin: 0 200px;
 }
 .header_nav_left,
@@ -57,7 +65,10 @@ a {
 .header_nav_left a,
 .header_nav_right_login,
 .header_nav_right_register,
-.login_nav_register {
+.login_nav_register,
+.edit_role_nav_cancel,
+.user_role_list_nav_add,
+.role_user_nav_cancel {
     color: white;
 }
 
@@ -70,28 +81,40 @@ a {
 .forum_topic_list,
 .forum_topic_list_div_a:hover,
 .forum_topic_list_edit:hover,
+.reply_field_edit:hover,
 .reply_nav_homepage:hover,
 .reply_nav_submit:hover,
 .edit_form_submit:hover,
 .register_submit_input:hover,
 .login_nav_submit:hover,
-.login_nav_register:hover {
+.login_nav_register:hover,
+.createRole_submit_input:hover,
+.listRole_box_action_edit:hover,
+.listRole_createRole_link:hover,
+.edit_role_nav_submit:hover,
+.edit_role_nav_cancel:hover,
+.user_role_list_nav_add:hover,
+.role_user_nav_update:hover,
+.role_user_nav_cancel:hover,
+.list_users_add_link:hover,
+.list_users_item_nav_edit:hover {
     color: aqua;
 }
 
 
+
 /*Main*/
 .main_container {
+    flex: 1 1 auto;
+    /* height: auto;*/
     background: rgb(18,19,19);
     background: linear-gradient(313deg, rgba(18,19,19,1) 0%, rgba(131,130,128,1) 100%);
 }
 .main {
     margin: 0 200px;
+    height: 100%;
     font-size: 1.6rem;
-    display: grid;
-    place-items: left;
-    min-height: 650px;
-    border: 8px solid;
+    border: 5px solid;
     padding: 1rem;
     border-image: linear-gradient(to bottom, black, grey) 0 1;
     color: white;
@@ -108,7 +131,13 @@ a {
 .topic_edit,
 .reply,
 .register,
-.login {
+.login,
+.createRole,
+.listRole,
+.edit_role,
+.user_role_list,
+.role_user,
+.list_users {
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
@@ -150,7 +179,8 @@ a {
     padding: 5px;
 }
 
-.forum_add {
+.forum_add,
+.list_users_add {
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
@@ -168,7 +198,7 @@ a {
     flex-direction: column;
 }
 
-.forum_topic_title{
+.forum_topic_title {
     margin-left: 25px;
 }
 
@@ -199,7 +229,11 @@ a {
 
 .forum_topic_list_form_submit,
 .reply_field_form_submit,
-.login_nav_submit {
+.login_nav_submit,
+.listRole_box_action_delete_submit,
+.edit_role_nav_submit,
+.role_user_nav_update,
+.list_users_item_nav_delete {
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
@@ -209,7 +243,9 @@ a {
 }
 
 .forum_topic_list_form_submit:hover,
-.reply_field_form_submit:hover {
+.reply_field_form_submit:hover,
+.listRole_box_action_delete_submit:hover,
+.list_users_item_nav_delete:hover {
     color: #F73697;
 }
 
@@ -242,7 +278,8 @@ a {
     width: 100%;
 }
 
-.reply_field_extension {
+.reply_field_extension,
+.listRole_box_name {
     margin: 10px 0;
     width: 80%;
     color: black;
@@ -294,8 +331,9 @@ a {
 
 /*Footer*/
 footer {
+    flex: 0 1 50px;
     width: 100%;
-    height: 50px;
+/*    height: 50px;*/
     background-color: black;
     color: white;
     text-align: center;
@@ -304,7 +342,13 @@ footer {
 /*Register*/
 
 .register_h1,
-.login_h1 {
+.login_h1,
+.createRole_h1,
+.listRole_h1,
+.edit_role_h1,
+.user_role_list_h2,
+.role_user_h1,
+.list_users_h1 {
     margin: 25px 0 20px 20px;
 }
 
@@ -312,7 +356,8 @@ footer {
 .register_password,
 .register_password_confirm,
 .login_email,
-.login_password {
+.login_password,
+.createRole_name {
     display: flex;
     flex-direction: column;
     margin: 20px 0 15px 20px;
@@ -323,18 +368,25 @@ footer {
 .register_password_confirm_input,
 .login_email_input,
 .login_password_input,
-.login_nav_register {
+.login_nav_register,
+.edit_role_name_input,
+.edit_role_nav_cancel,
+.user_role_list_nav_add,
+.role_user_nav_cancel,
+.list_users_item_name_input {
     width: 50%;
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
 }
 
-.register_submit {
+.register_submit,
+.createRole_submit {
     margin: 30px 0 25px 20px;
 }
 
-.register_submit_input {
+.register_submit_input,
+.createRole_submit_input {
     border: 5px solid grey;
     background-color: grey;
     border-radius: 10px;
@@ -358,19 +410,212 @@ footer {
     margin: 20px 0 15px 20px;
 }
 
-.login_nav_submit {
+.login_nav_submit,
+.edit_role_nav_submit,
+.role_user_nav_update {
     width: 180px;
     margin-right: 20px;
 }
 
-.login_nav_register {
-   padding: 8px 38px;
+.login_nav_register,
+.edit_role_nav_cancel {
+    padding: 8px 38px;
 }
 
-.login_nav_register:hover {
+.login_nav_register:hover,
+.edit_role_nav_cancel:hover,
+.user_role_list_nav_add:hover,
+.role_user_nav_cancel:hover {
     text-decoration: none;
 }
 
+/*Role*/
+
+.listRole_createRole {
+    border: 5px solid grey;
+    border-style: inset;
+    border-radius: 10px;
+    margin: 40px 0 40px 20px;
+    text-align: center;
+    width: 190px;
+}
+
+.listRole_createRole_link,
+.list_users_add_link {
+    color: white;
+}
+
+.listRole_box,
+.list_users_item {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 20px 35px 20px;
+    justify-content: space-between;
+}
+
+.listRole_box_id,
+.listRole_box_name {
+    margin-bottom: 0;
+}
+
+.listRole_box_name {
+    width: 100%;
+}
+
+.listRole_box_action {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.listRole_box_action_edit {
+    color: white;
+    margin: 0 20px 7px 0;
+}
+
+.edit_role{
+    margin-bottom: 40px;
+}
+
+.edit_role_id,
+.edit_role_name,
+.edit_role_nav {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0 15px 20px;
+}
+
+.edit_role_id_label,
+.edit_role_name_label,
+.list_users_item_id_label,
+.list_users_item_name_label {
+    margin-bottom: 0;
+    margin-right: 20px;
+}
+.edit_role_id_input,
+.list_users_item_id_input {
+    background-color: inherit;
+    border: 0;
+    color: white;
+    width: 70%;
+}
+.edit_role_name {
+    align-items: center;
+}
+.edit_role_name_input,
+.list_users_item_name_input {
+    width: 380px;
+    padding-left: 10px;
+}
+.edit_role_nav{
+    margin-top: 45px;
+}
+.edit_role_nav_cancel {
+    width: 180px;
+}
+
+.user_role_list {
+    margin-bottom: 50px;
+}
+
+.user_role_list_member,
+.role_user_list {
+    border: 5px solid grey;
+    border-style: inset;
+    border-radius: 10px;
+    margin: 30px 0 20px 20px;
+    padding-left: 10px;
+    background-color: white;
+    color: black;
+    width: 60%;
+}
+.user_role_list_member_name {
+    margin-bottom: 0;
+}
+
+.user_role_list_nav_div {
+    margin: 35px 0 30px 20px;
+}
+
+.user_role_list_nav_add {
+    width: auto;
+    padding: 10px;
+}
+
+.role_user_data{
+    margin-left: 20px;
+}
+
+.role_user_list{
+    display:flex;
+    flex-direction: column;
+}
+.role_user_list_item {
+    display: flex;
+    flex-direction: row;
+}
+
+.role_user_list_item_select{
+    margin-right: 10px;
+    margin-bottom: 3px;
+}
+
+.role_user_nav {
+    margin: 35px 0 35px 20px;
+}
+
+.role_user_nav_update{
+    margin-right: 10px;
+}
+
+.role_user_nav_cancel{
+   padding: 8px 45px;
+}
+
+.list_users_add {
+   margin: 30px 0 50px 20px;
+}
+
+.list_users_form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 20px 50px 0;
+}
+
+.list_users_items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.list_users_item {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+.list_users_item_id {
+    display: flex;
+    flex-direction: row;
+}
+.list_users_item_id_input {
+    width: 100%;
+}
+.list_users_item_name_input {
+    width: 425px;
+}
+.list_users_item_nav {
+    display: flex;
+    flex-direction: row;
+    flex: 0 1 auto;
+    justify-content: center;
+    align-items: center;
+}
+.list_users_item_nav_edit{
+    border: 0;
+    color: white;
+    background-color: inherit;
+    margin-right: 20px;
+}
 /*Validation error*/
 .attribute_error,
 .error_submit {
@@ -383,3 +628,15 @@ footer {
     margin-left: 0;
 }
 
+/*Access Denied*/
+
+.access_denied {
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    margin-top: 70px;
+}
+
+.access_denied_img{
+    width: 500px;
+}

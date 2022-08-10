@@ -1,6 +1,7 @@
 ﻿using CarForum.Domain;
 using CarForum.Domain.Entities;
 using CarForum.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -26,6 +27,8 @@ namespace CarForum.Controllers
             this.topicField = topicField;
         }
 
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var topic = dataManager.EFTopicFields.GetTopic().ToList();

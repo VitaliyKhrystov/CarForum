@@ -1,6 +1,7 @@
 ﻿using CarForum.Domain;
 using CarForum.Models;
 using CarForum.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,12 +24,14 @@ namespace CarForum.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel registerModel)
         {
             if (ModelState.IsValid)
@@ -56,12 +59,14 @@ namespace CarForum.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginModel)
         {
@@ -94,6 +99,42 @@ namespace CarForum.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string userName, string userId)
+        {
+            user = await userManager.FindByIdAsync(userId);
+
+            if (user.UserName != userName)
+            {
+                user.UserName = userName;
+
+                await userManager.UpdateAsync(user);
+            }
+
+            return RedirectToAction("ListUsers", "Administration");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string userId)
+        {
+            user = await userManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                await userManager.DeleteAsync(user);
+            }
+
+            return RedirectToAction("ListUsers", "Administration");
         }
     }
 }

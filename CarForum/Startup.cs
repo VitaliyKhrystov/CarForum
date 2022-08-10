@@ -4,9 +4,11 @@ using CarForum.Domain.Repositories.Abstract;
 using CarForum.Domain.Repositories.EntityFrameWork;
 using CarForum.Models;
 using CarForum.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,12 +40,21 @@ namespace CarForum
                                                     })
                                                     .AddEntityFrameworkStores<AppDbContext>();
 
+            services.AddMvc(options =>
+                        {
+                            var policy = new AuthorizationPolicyBuilder()
+                                        .RequireAuthenticatedUser()
+                                        .Build();
+                            options.Filters.Add(new AuthorizeFilter(policy));
+                        }).AddXmlSerializerFormatters();
+
             services.AddTransient<ITopicFieldRepository, EFTopicField>();
             services.AddTransient<IResponseRepository, EFResponse>();
             services.AddTransient<DataManager>();
             services.AddTransient<TopicResponseModel>();
             services.AddTransient<TopicField>();
             services.AddTransient<Response>();
+            services.AddTransient<IdentityRole>();
 
         }
 

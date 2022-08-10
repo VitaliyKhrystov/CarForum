@@ -1,0 +1,32 @@
+﻿@model List<UserRoleViewModel>
+@{
+    ViewData["Title"] = "Edit Role";
+}
+
+<form class="role_user" method="post">
+    <h1 class="role_user_h1">Role Management</h1>
+    <div class="role_user_data">
+        <p class="role_user_data_id">id: @ViewBag.RoleId</p>
+        <p class="role_user_data_name">Role Name: @ViewBag.Name</p>
+    </div>
+
+    <div class="role_user_list">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+        <div class="role_user_list_item">
+            <input class="role_user_list_item_select" type="checkbox" asp-for="@Model[i].IsSelected" />
+            <label class="role_user_list_item_name" asp-for="@Model[i].IsSelected">@Model[i].UserName</label>
+            <input asp-for="@Model[i].UserId" hidden />
+            <input asp-for="@Model[i].UserName" hidden />
+            <input type="text" name="roleid" value="@ViewBag.RoleId" hidden/>
+        </div>
+            
+        }
+    </div>
+
+    <div class="role_user_nav">
+        <input class="role_user_nav_update" type="submit" asp-controller="Administration" asp-action="Update" value="Update" />
+        <a class="role_user_nav_cancel" asp-controller="Administration" asp-action="EditRole" asp-route-id="@ViewBag.RoleId">Cancel</a>
+    </div>
+</form>
+    

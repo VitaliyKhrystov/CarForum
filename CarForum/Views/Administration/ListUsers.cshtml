@@ -1,0 +1,43 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "List Users";
+}
+
+<div class="list_users">
+    <h1 class="list_users_h1">List Users</h1>
+    <div class="list_users_add">
+        <a class="list_users_add_link" asp-controller="Account" asp-action="Register">Add New User</a>
+    </div>
+    <div class="list_users_form" >
+        @foreach (var item in Model)
+        {
+            if (Model == null)
+            {
+                <p>There are any users</p>
+            }
+            else
+            {
+            <form class="list_users_items" method="post">
+                <div class="list_users_item">
+                    <div class="list_users_item_id">
+                        <label class="list_users_item_id_label" asp-for="@item.Id">Id:</label>
+                        <input class="list_users_item_id_input" asp-for="@item.Id" disabled />
+                    </div>
+
+                    <div class="list_users_item_name">
+                        <label class="list_users_item_name_label" asp-for="@item.UserName">Name:</label>
+                        <input class="list_users_item_name_input" name="UserName" value="@item.UserName"/>
+                    </div>
+                    <input class="list_users_item_name_input" asp-for="@item.Email" hidden/>
+                </div>
+                <div class="list_users_item_nav">
+                    <input class="list_users_item_nav_edit" type="submit" value="Edit" asp-controller="Account" asp-action="Edit" asp-route-userId="@item.Id" style="transition-delay:"/>
+                    <input class="list_users_item_nav_delete" type="submit" value="Delete" asp-controller="Account" asp-action="Delete" asp-route-userId="@item.Id" />
+                </div>
+            </form>
+                
+            }
+            
+        }
+    </div>
+</div>

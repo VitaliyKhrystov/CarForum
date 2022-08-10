@@ -1,10 +1,14 @@
 ﻿<header>
     <nav class="header_nav">
-            <ul class="header_nav_left">
-                <li><a href="/">Home page</a></li>
-                <li><a href="/">About us</a></li>
-                <li><a href="/">Contacts</a></li>
-            </ul>
+        <ul class="header_nav_left">
+            <li><a href="/">Home page</a></li>
+            <li><a href="/">Contacts</a></li>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+            {
+                <li><a asp-controller="Administration" asp-action="ListUsers">Manage Users</a></li>
+                <li><a asp-controller="Administration" asp-action="ListRoles">Manage Roles</a></li>
+            }
+        </ul>
             <ul class="header_nav_right">
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -16,7 +20,7 @@
                     <li>@name</li>
                     <li>
                         <form asp-controller="Account" asp-action="Logout" method="post">
-                            <input class="header_nav_right_exit" type="submit" name="name" value="Exit" />
+                            <input class="header_nav_right_exit" type="submit" name="name" value="Logout" />
                         </form>
                     </li>
                 }
