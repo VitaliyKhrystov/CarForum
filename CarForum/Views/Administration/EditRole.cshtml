@@ -6,7 +6,7 @@
 <div class="edit_role">
     <h1 class="edit_role_h1">Edit Role</h1>
     <div class="attribute_error" asp-validation-summary="All"></div>
-    <form class="edit_role_form" asp-controller="Administration" asp-action="EditRole" method="post">
+    <form class="edit_role_form" asp-controller="Administration" asp-action="EditUser" method="post">
         <div class="edit_role_id">
             <label class="edit_role_id_label" asp-for="Id">Id:</label>
             <input class="edit_role_id_input" type="text" asp-for="Id" value="@Model.Id" disabled />

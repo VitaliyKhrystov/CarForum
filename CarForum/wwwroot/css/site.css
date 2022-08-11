@@ -68,7 +68,9 @@ a {
 .login_nav_register,
 .edit_role_nav_cancel,
 .user_role_list_nav_add,
-.role_user_nav_cancel {
+.role_user_nav_cancel,
+.edit_user_nav_cancel,
+.not_found_home_link {
     color: white;
 }
 
@@ -97,7 +99,10 @@ a {
 .role_user_nav_update:hover,
 .role_user_nav_cancel:hover,
 .list_users_add_link:hover,
-.list_users_item_nav_edit:hover {
+.list_users_item_nav_edit:hover,
+.edit_user_nav_submit:hover,
+.edit_user_nav_cancel:hover,
+.not_found_home_link:hover {
     color: aqua;
 }
 
@@ -137,7 +142,8 @@ a {
 .edit_role,
 .user_role_list,
 .role_user,
-.list_users {
+.list_users,
+.edit_user {
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
@@ -233,7 +239,8 @@ a {
 .listRole_box_action_delete_submit,
 .edit_role_nav_submit,
 .role_user_nav_update,
-.list_users_item_nav_delete {
+.list_users_item_nav_delete,
+.edit_user_nav_submit {
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
@@ -348,7 +355,8 @@ footer {
 .edit_role_h1,
 .user_role_list_h2,
 .role_user_h1,
-.list_users_h1 {
+.list_users_h1,
+.edit_user_h1 {
     margin: 25px 0 20px 20px;
 }
 
@@ -373,7 +381,10 @@ footer {
 .edit_role_nav_cancel,
 .user_role_list_nav_add,
 .role_user_nav_cancel,
-.list_users_item_name_input {
+.list_users_item_name_input,
+.edit_user_name_input,
+.edit_user_email_input,
+.edit_user_nav_cancel {
     width: 50%;
     border: 5px solid grey;
     border-style: inset;
@@ -412,20 +423,23 @@ footer {
 
 .login_nav_submit,
 .edit_role_nav_submit,
-.role_user_nav_update {
+.role_user_nav_update,
+.edit_user_nav_submit {
     width: 180px;
     margin-right: 20px;
 }
 
 .login_nav_register,
-.edit_role_nav_cancel {
+.edit_role_nav_cancel,
+.edit_user_nav_cancel {
     padding: 8px 38px;
 }
 
 .login_nav_register:hover,
 .edit_role_nav_cancel:hover,
 .user_role_list_nav_add:hover,
-.role_user_nav_cancel:hover {
+.role_user_nav_cancel:hover,
+.edit_user_nav_cancel:hover {
     text-decoration: none;
 }
 
@@ -473,13 +487,18 @@ footer {
     margin: 0 20px 7px 0;
 }
 
-.edit_role{
+.edit_role,
+.edit_user {
     margin-bottom: 40px;
 }
 
 .edit_role_id,
 .edit_role_name,
-.edit_role_nav {
+.edit_role_nav,
+.edit_user_id,
+.edit_user_name,
+.edit_user_email,
+.edit_user_nav {
     display: flex;
     flex-direction: row;
     margin: 20px 0 15px 20px;
@@ -488,29 +507,39 @@ footer {
 .edit_role_id_label,
 .edit_role_name_label,
 .list_users_item_id_label,
-.list_users_item_name_label {
+.list_users_item_name_label,
+.edit_user_id_label,
+.edit_user_name_label,
+.edit_user_email_label {
     margin-bottom: 0;
     margin-right: 20px;
 }
 .edit_role_id_input,
-.list_users_item_id_input {
+.list_users_item_id_input,
+.edit_user_id_input {
     background-color: inherit;
     border: 0;
     color: white;
     width: 70%;
 }
-.edit_role_name {
+.edit_role_name,
+.edit_user_name,
+.edit_user_email {
     align-items: center;
 }
 .edit_role_name_input,
-.list_users_item_name_input {
+.list_users_item_name_input,
+.edit_user_name_input,
+.edit_user_email_input {
     width: 380px;
     padding-left: 10px;
 }
-.edit_role_nav{
+.edit_role_nav,
+.edit_user_nav {
     margin-top: 45px;
 }
-.edit_role_nav_cancel {
+.edit_role_nav_cancel,
+.edit_user_nav_cancel {
     width: 180px;
 }
 
@@ -602,6 +631,7 @@ footer {
 }
 .list_users_item_name_input {
     width: 425px;
+    background-color: white;
 }
 .list_users_item_nav {
     display: flex;
@@ -639,4 +669,22 @@ footer {
 
 .access_denied_img{
     width: 500px;
+}
+
+/*Not Found*/
+
+.not_found {
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+    margin-top: 100px;
+}
+.not_found_home {
+    margin-top: 30px;
+}
+.not_found_home_link {
+    border: 5px solid grey;
+    border-style: inset;
+    border-radius: 10px;
+    padding: 8px 20px;
 }

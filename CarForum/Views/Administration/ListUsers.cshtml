@@ -26,13 +26,12 @@
 
                     <div class="list_users_item_name">
                         <label class="list_users_item_name_label" asp-for="@item.UserName">Name:</label>
-                        <input class="list_users_item_name_input" name="UserName" value="@item.UserName"/>
+                        <input class="list_users_item_name_input" asp-for="@item.UserName" disabled/>
                     </div>
-                    <input class="list_users_item_name_input" asp-for="@item.Email" hidden/>
                 </div>
                 <div class="list_users_item_nav">
-                    <input class="list_users_item_nav_edit" type="submit" value="Edit" asp-controller="Account" asp-action="Edit" asp-route-userId="@item.Id" style="transition-delay:"/>
-                    <input class="list_users_item_nav_delete" type="submit" value="Delete" asp-controller="Account" asp-action="Delete" asp-route-userId="@item.Id" />
+                    <a class="list_users_item_nav_edit" asp-controller="Administration" asp-action="EditUser" asp-route-userId="@item.Id">Edit</a>
+                    <input class="list_users_item_nav_delete" type="submit" value="Delete" asp-controller="Administration" asp-action="DeleteUser" asp-route-userId="@item.Id" />
                 </div>
             </form>
                 

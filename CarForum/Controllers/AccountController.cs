@@ -42,8 +42,12 @@ namespace CarForum.Controllers
 
                 if (addNewUser.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Administration");
+                    }
+                        await signInManager.SignInAsync(user, false);
+                        return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -109,32 +113,5 @@ namespace CarForum.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(string userName, string userId)
-        {
-            user = await userManager.FindByIdAsync(userId);
-
-            if (user.UserName != userName)
-            {
-                user.UserName = userName;
-
-                await userManager.UpdateAsync(user);
-            }
-
-            return RedirectToAction("ListUsers", "Administration");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(string userId)
-        {
-            user = await userManager.FindByIdAsync(userId);
-
-            if (user != null)
-            {
-                await userManager.DeleteAsync(user);
-            }
-
-            return RedirectToAction("ListUsers", "Administration");
-        }
     }
 }

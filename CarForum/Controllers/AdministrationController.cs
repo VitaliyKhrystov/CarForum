@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CarForum.Controllers
 {
@@ -29,11 +30,90 @@ namespace CarForum.Controllers
             return View(users);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string userId)
+        {
+           User user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with id: {userId} cannot be found";
+                return View("NotFoundInfo");
+            }
+
+            var claims = await userManager.GetClaimsAsync(user);
+            var roles = await userManager.GetRolesAsync(user);
+
+            EditUserViewModel editUserViewModel = new EditUserViewModel()
+            {
+                Id = user.Id,
+                NameUser = user.UserName,
+                Email = user.Email,
+                Claims = claims.Select(c => c.Value).ToList(),
+                Roles = roles.ToList()
+            };
+
+            return View(editUserViewModel);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                User user = await userManager.FindByIdAsync(model.Id);
+
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = $"User with id: {model.Id} cannot be found";
+                    return View("NotFoundInfo");
+                }
+
+                else
+                {
+                    user.UserName = model.NameUser;
+                    user.Email = model.Email;
+
+                    var result = await userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ListUsers");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+           User user = await userManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                await userManager.DeleteAsync(user);
+            }
+
+            return RedirectToAction("ListUsers", "Administration");
+        }
+
+
         [HttpGet]
         public IActionResult CreateRole()
         {
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
@@ -56,6 +136,7 @@ namespace CarForum.Controllers
             return View(model);
         }
 
+
         [HttpGet]
         public IActionResult ListRoles()
         {
@@ -64,6 +145,7 @@ namespace CarForum.Controllers
             return View(roles);
         }
 
+
         [HttpGet]
         public async Task<IActionResult> EditRole(string Id)
         {
@@ -71,8 +153,8 @@ namespace CarForum.Controllers
 
             if (identityRole == null)
             {
-                ViewBag.ErrorMessage = $"Role with id = {Id} cannot be found";
-                return View("NotFound");
+                ViewBag.ErrorMessage = $"Role with id: {Id} cannot be found";
+               return View("NotFoundInfo");
             }
 
             var model = new EditRoleViewModel()
@@ -92,6 +174,7 @@ namespace CarForum.Controllers
             return View(model);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
@@ -102,8 +185,8 @@ namespace CarForum.Controllers
 
                 if (identityRole == null)
                 {
-                    ViewBag.ErrorMessage = $"Role with id = {model.Id} cannot be found";
-                    return View("NotFound");
+                   ViewBag.ErrorMessage = $"Role with id: {model.Id} cannot be found";
+                   return View("NotFoundInfo");
                 }
 
                 else
@@ -125,8 +208,9 @@ namespace CarForum.Controllers
             return View(model);
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteRole(string id)
         {
             identityRole = await roleManager.FindByIdAsync(id);
 
@@ -140,14 +224,16 @@ namespace CarForum.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = $"Role with id = {id} cannot be delete";
-                    return View("NotFound");
+                    ViewBag.ErrorMessage = $"Role with id: {id} cannot be delete";
+                   return View("NotFoundInfo");
                 }
             }
 
             return RedirectToAction("Home", "Index");    
 
         }
+
+
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
@@ -155,8 +241,8 @@ namespace CarForum.Controllers
 
             if (identityRole == null)
             {
-                ViewBag.ErrorMessage = $"Role with id = {roleId} cannot be found";
-                return View("NotFound");
+                ViewBag.ErrorMessage = $"Role with id: {roleId} cannot be found";
+               return View("NotFoundInfo");
             }
             else
             {
@@ -187,6 +273,7 @@ namespace CarForum.Controllers
 
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Update(List<UserRoleViewModel> model, string roleId)
         {
@@ -194,8 +281,8 @@ namespace CarForum.Controllers
 
             if (identityRole == null)
             {
-                ViewBag.ErrorMessage = $"Role with id = {roleId} cannot be found";
-                return View("NotFound");
+                ViewBag.ErrorMessage = $"Role with id: {roleId} cannot be found";
+               return View("NotFoundInfo");
             }
 
             for (int i = 0; i < model.Count; i++)
