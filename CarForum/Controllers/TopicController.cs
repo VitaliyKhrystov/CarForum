@@ -3,6 +3,7 @@ using CarForum.Domain.Entities;
 using CarForum.Domain.Repositories.Abstract;
 using CarForum.Domain.Repositories.EntityFrameWork;
 using CarForum.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace CarForum.Controllers
 {
+    [Authorize(Roles = "Admin, User")]
     public class TopicController : Controller
     {
         private readonly ILogger<HomeController> _logger;

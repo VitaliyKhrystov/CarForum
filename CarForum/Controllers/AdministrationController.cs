@@ -9,18 +9,20 @@ using System.Linq;
 
 namespace CarForum.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<User> userManager;
         private IdentityRole identityRole;
+        private User user;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IdentityRole identityRole)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IdentityRole identityRole, User user)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
             this.identityRole = identityRole;
+            this.user = user;
         }
 
         [HttpGet]
@@ -34,7 +36,7 @@ namespace CarForum.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(string userId)
         {
-           User user = await userManager.FindByIdAsync(userId);
+           user = await userManager.FindByIdAsync(userId);
 
             if (user == null)
             {
@@ -64,7 +66,7 @@ namespace CarForum.Controllers
             if (ModelState.IsValid)
             {
 
-                User user = await userManager.FindByIdAsync(model.Id);
+                user = await userManager.FindByIdAsync(model.Id);
 
                 if (user == null)
                 {
@@ -97,7 +99,7 @@ namespace CarForum.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string userId)
         {
-           User user = await userManager.FindByIdAsync(userId);
+            user = await userManager.FindByIdAsync(userId);
 
             if (user != null)
             {
@@ -107,6 +109,86 @@ namespace CarForum.Controllers
             return RedirectToAction("ListUsers", "Administration");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ManageUserRole(string userId)
+        {
+            if (userId == null)
+            {
+                ViewBag.ErrorMessage = $"User with id: {userId} cannot be found";
+                return View("NotFoundInfo");
+            }
+            user = await userManager.FindByIdAsync(userId);
+            ViewBag.UserId = user.Id;
+            ViewBag.UserName = user.UserName;
+
+            var model = new List<UserRolesViewModel>();
+            
+            foreach (var role in roleManager.Roles)
+            {
+                var userRole = new UserRolesViewModel()
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRole.IsSelected = true;
+                }
+                else
+                {
+                    userRole.IsSelected = false;
+                }
+                model.Add(userRole);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUserRole(List<UserRolesViewModel> model, string userId)
+        {
+            if (userId == null)
+            {
+                ViewBag.ErrorMessage = $"User with id: {userId} cannot be found";
+                return View("NotFoundInfo");
+            }
+            if (ModelState.IsValid)
+            {
+                user = await userManager.FindByIdAsync(userId);
+                IdentityResult result = null;
+
+                for (int i = 0; i < model.Count; i++)
+                {
+                    if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, model[i].RoleName)))
+                    {
+                        result = await userManager.AddToRoleAsync(user, model[i].RoleName);
+                    }
+                    else if (!(model[i].IsSelected) && await userManager.IsInRoleAsync(user, model[i].RoleName))
+                    {
+                        result = await userManager.RemoveFromRoleAsync(user, model[i].RoleName);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    if (result.Succeeded)
+                    {
+                        if (i < model.Count - 1)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            return RedirectToAction("EditUser", new { userId = user.Id });
+                        }
+                    }
+                }
+                return RedirectToAction("EditUser", new { userId = user.Id });
+            }
+
+            return View(model);
+        }
 
         [HttpGet]
         public IActionResult CreateRole()
@@ -321,5 +403,6 @@ namespace CarForum.Controllers
             return RedirectToAction("EditRole", new { id = roleId });
         }
 
+ 
     }
 }

@@ -17,14 +17,15 @@
         @foreach (var topic in Model)
         {
             <div class="forum_topic_list">
-                <div class="forum_topic_list_div"><a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="Reply" asp-route-id="@topic.Id">@topic.QuestionShort</a></div>
-                <a class="forum_topic_list_edit" asp-controller="Home" asp-action="Edit" asp-route-id="@topic.Id">Edit</a>
+                <div class="forum_topic_list_div">
+                    <a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="Reply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
+                </div>
+                    <a class="forum_topic_list_edit" asp-controller="Home" asp-action="Edit" asp-route-id="@topic.Id">Edit</a>
 
                 <form class="forum_topic_list_form" asp-action="Delete" asp-route-id="@topic.Id" method="post">
                     <button class="forum_topic_list_form_submit" type="submit">Delete</button>
                 </form>
-             </div>
-
+            </div>
          }
 
     </div>

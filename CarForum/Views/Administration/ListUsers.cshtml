@@ -31,7 +31,8 @@
                 </div>
                 <div class="list_users_item_nav">
                     <a class="list_users_item_nav_edit" asp-controller="Administration" asp-action="EditUser" asp-route-userId="@item.Id">Edit</a>
-                    <input class="list_users_item_nav_delete" type="submit" value="Delete" asp-controller="Administration" asp-action="DeleteUser" asp-route-userId="@item.Id" />
+                    <input class="list_users_item_nav_delete" type="submit" value="Delete" asp-controller="Administration" 
+                           asp-action="DeleteUser" asp-route-userId="@item.Id" onclick="return confirm('Are you sure you want to delete user: @item.UserName')"/>
                 </div>
             </form>
                 

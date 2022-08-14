@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CarForum.Controllers
 {
+    [Authorize(Roles = "Admin, User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -91,10 +92,5 @@ namespace CarForum.Controllers
 
         }
 
-        //[HttpGet]
-        //public IActionResult NotFoundInfo()
-        //{
-        //   return View();
-        //}
     }
 }

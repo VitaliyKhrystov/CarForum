@@ -7,6 +7,7 @@ using CarForum.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,12 @@ namespace CarForum
                             options.Filters.Add(new AuthorizeFilter(policy));
                         }).AddXmlSerializerFormatters();
 
+
+            services.ConfigureApplicationCookie(options =>
+                           options.AccessDeniedPath = new PathString("/Account/AccessDenied")
+                        );
+
+
             services.AddTransient<ITopicFieldRepository, EFTopicField>();
             services.AddTransient<IResponseRepository, EFResponse>();
             services.AddTransient<DataManager>();
@@ -55,7 +62,7 @@ namespace CarForum
             services.AddTransient<TopicField>();
             services.AddTransient<Response>();
             services.AddTransient<IdentityRole>();
-
+            services.AddTransient<User>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

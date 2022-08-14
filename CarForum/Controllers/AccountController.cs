@@ -11,27 +11,27 @@ using System.Threading.Tasks;
 
 namespace CarForum.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private User user;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, User user)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.user = user;
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel registerModel)
         {
             if (ModelState.IsValid)
@@ -42,11 +42,13 @@ namespace CarForum.Controllers
 
                 if (addNewUser.Succeeded)
                 {
+                    await userManager.AddToRoleAsync(user, "user");
                     if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                     {
                         return RedirectToAction("ListUsers", "Administration");
                     }
-                        await signInManager.SignInAsync(user, false);
+
+                        await signInManager.SignInAsync(user, false); 
                         return RedirectToAction("Index", "Home");
                 }
                 else
@@ -63,14 +65,12 @@ namespace CarForum.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginModel)
         {
@@ -91,7 +91,7 @@ namespace CarForum.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Wrong username and/or password!");
+                    ModelState.AddModelError("", "Wrong email and/or password!");
                 }
             }
             return View(loginModel);
@@ -107,7 +107,6 @@ namespace CarForum.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult AccessDenied()
         {
             return View();
