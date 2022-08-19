@@ -1,15 +1,17 @@
 ﻿using CarForum.Domain;
 using CarForum.Domain.Entities;
 using CarForum.Domain.Repositories.Abstract;
-using CarForum.Domain.Repositories.EntityFrameWork;
 using CarForum.Models;
+using CarForum.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,8 +27,10 @@ namespace CarForum.Controllers
         private List<Response> responses;
         private TopicField topicField;
         private Response response;
+        private readonly UserManager<User> userManager;
+        private readonly IWebHostEnvironment env;
 
-        public TopicController(ILogger<HomeController> logger, AppDbContext context, DataManager dataManager, TopicResponseModel topicResponseModel, TopicField  topicField, Response response)
+        public TopicController(ILogger<HomeController> logger, AppDbContext context, DataManager dataManager, TopicResponseModel topicResponseModel, TopicField  topicField, Response response, UserManager<User> userManager, IWebHostEnvironment env)
         {
             _logger = logger;
             this.context = context;
@@ -34,14 +38,95 @@ namespace CarForum.Controllers
             this.topicResponseModel = topicResponseModel;
             this.topicField = topicField;
             this.response = response;
+            this.userManager = userManager;
+            this.env = env;
             responses = new List<Response>();
         }
-        public ActionResult Add()
+
+        [HttpGet]
+        public ActionResult CreateTopic()
         {
             return View();
         }
 
-        public async Task<ActionResult> ReplyAsync(int id)
+        [HttpPost]
+        public async Task<ActionResult> CreateTopic(CreateTopicViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await userManager.FindByNameAsync(User.Identity.Name);
+
+                topicField = new TopicField()
+                {
+                    QuestionShort = model.TopicShort,
+                    QuestionExtension = model.TopicExtension,
+                    User = user,
+                    TopicData = DateTime.Now
+                };
+
+                if (model.UploadFile != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + "-" + model.UploadFile.FileName;
+                    string path = Path.Combine(env.WebRootPath, "img/UserFiles", fileName);
+                    using (var filestrem = new FileStream(path, FileMode.Create))
+                    {
+                        await model.UploadFile.CopyToAsync(filestrem);
+                    }
+
+                    topicField.ImageName = fileName;
+                }
+
+                await dataManager.EFTopicFields.CreateTopicAsync(topicField);
+                await dataManager.EFTopicFields.SaveTopicAsync(); 
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+            [HttpGet]
+        public async Task<IActionResult> EditTopic(int id)
+        {
+            topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
+
+            if (topicField != null)
+            {
+                return View(topicField);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditTopic(TopicField _topicField)
+        {
+            dataManager.EFTopicFields.UpdateTopic(_topicField);
+            await dataManager.EFTopicFields.SaveTopicAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<ActionResult> DeleteTopic(int id)
+        {
+
+            foreach (var item in context.Responses.ToList())
+            {
+                if (item.TopicFieldID == id)
+                {
+                    dataManager.EFResponses.DeleteResponse(item);
+                    await dataManager.EFResponses.SaveResponseAsync();
+                }
+            }
+
+            topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
+            dataManager.EFTopicFields.DeleteTopic(topicField);
+            await dataManager.EFTopicFields.SaveTopicAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> CreateReply(int id)
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
@@ -60,15 +145,16 @@ namespace CarForum.Controllers
             return View(topicResponseModel);
         }
 
-       
         [HttpPost]
-        public async Task<ActionResult> ReplyPostAsync(int id, string reply)
+        public async Task<ActionResult> CreateReply(int id, string reply)
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
+            User user = await userManager.FindByNameAsync(User.Identity.Name);
 
             if (reply != null || reply == string.Empty)
             {
-                response = new Response() { Reply = reply, TopicField = topicField };
+                response = new Response() { Reply = reply, TopicField = topicField, ReplyData = DateTime.Now, User = user };
+
                await dataManager.EFResponses.CreateResponseAsync(response);
                await dataManager.EFResponses.SaveResponseAsync();
             }
@@ -79,11 +165,11 @@ namespace CarForum.Controllers
 
             int ID = topicField.Id;
 
-            return RedirectToAction("Reply", "Topic", new { id = ID });
+            return RedirectToAction("CreateReply", "Topic", new { id = ID });
         }
 
         [HttpGet]
-        public async Task<ActionResult> EditAsync(int id)
+        public async Task<ActionResult> EditReply(int id)
         {
             response = await dataManager.EFResponses.GetResponseByIdAsync(id);
             topicResponseModel.Responces = new List<Response>() { response };
@@ -99,20 +185,23 @@ namespace CarForum.Controllers
             return View(topicResponseModel);
         }
 
+       
         [HttpPost]
-        public async Task<ActionResult> EditPostAsync(Response _response)
+        public async Task<ActionResult> EditReply(Response _response)
         {
-
+            User user = await userManager.FindByNameAsync(User.Identity.Name);
+            _response.UserId = user.Id;
+            _response.ReplyData = DateTime.Now;
             dataManager.EFResponses.UpdateResponse(_response);
             await dataManager.EFResponses.SaveResponseAsync();
 
             int ID = _response.TopicFieldID;
 
-            return RedirectToAction("Reply", "Topic", new { id = ID });
+            return RedirectToAction("CreateReply", "Topic", new { id = ID });
         }
 
         [HttpPost]
-        public async Task<ActionResult> DeleteAsync(int id)
+        public async Task<ActionResult> DeleteReply(int id)
         {
             response = await dataManager.EFResponses.GetResponseByIdAsync(id);
             dataManager.EFResponses.DeleteResponse(response);
@@ -121,7 +210,7 @@ namespace CarForum.Controllers
             int ID = response.TopicFieldID;
 
 
-            return RedirectToAction("Reply", "Topic", new { id = ID });
+            return RedirectToAction("CreateReply", "Topic", new { id = ID });
 
         }
     }

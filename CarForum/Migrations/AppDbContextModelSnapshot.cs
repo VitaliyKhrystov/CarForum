@@ -30,12 +30,20 @@ namespace CarForum.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("ReplyData")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("TopicFieldID")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TopicFieldID");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Responses");
                 });
@@ -47,6 +55,9 @@ namespace CarForum.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("QuestionExtension")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -55,7 +66,15 @@ namespace CarForum.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("TopicData")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TopicFields");
                 });
@@ -266,6 +285,17 @@ namespace CarForum.Migrations
                         .HasForeignKey("TopicFieldID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CarForum.Models.User", "User")
+                        .WithMany("Responses")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CarForum.Domain.Entities.TopicField", b =>
+                {
+                    b.HasOne("CarForum.Models.User", "User")
+                        .WithMany("TopicFields")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

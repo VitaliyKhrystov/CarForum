@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarForum.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,25 +39,12 @@ namespace CarForum.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TopicFields",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestionShort = table.Column<string>(nullable: false),
-                    QuestionExtension = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TopicFields", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,13 +154,38 @@ namespace CarForum.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TopicFields",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuestionShort = table.Column<string>(nullable: false),
+                    QuestionExtension = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    TopicData = table.Column<DateTime>(nullable: false),
+                    ImageName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TopicFields", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TopicFields_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Responses",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Reply = table.Column<string>(nullable: false),
-                    TopicFieldID = table.Column<int>(nullable: false)
+                    TopicFieldID = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    ReplyData = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -184,6 +196,12 @@ namespace CarForum.Migrations
                         principalTable: "TopicFields",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Responses_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -229,6 +247,16 @@ namespace CarForum.Migrations
                 name: "IX_Responses_TopicFieldID",
                 table: "Responses",
                 column: "TopicFieldID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Responses_UserId",
+                table: "Responses",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TopicFields_UserId",
+                table: "TopicFields",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -255,10 +283,10 @@ namespace CarForum.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "TopicFields");
 
             migrationBuilder.DropTable(
-                name: "TopicFields");
+                name: "AspNetUsers");
         }
     }
 }

@@ -17,9 +17,8 @@
         ID = item.Id;
         topicFieldID = item.TopicFieldID;
         reply = item.Reply;
-
     }
-<form class="edit_form" asp-controller="Topic" asp-action="EditPost" method="post">
+<form class="edit_form" asp-controller="Topic" asp-action="EditReply" method="post">
     <textarea class="edit_form_response" rows='1' asp-for="@reply" placeholder="" onkeyup="checkParams()" required></textarea> <br>
     <input asp-for="@ID" hidden />
     <input asp-for="@topicFieldID" hidden />

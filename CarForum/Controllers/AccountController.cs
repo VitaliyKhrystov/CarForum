@@ -17,12 +17,14 @@ namespace CarForum.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private User user;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, User user)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, User user, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.user = user;
+            this.roleManager = roleManager;
         }
 
         [HttpGet]
@@ -42,8 +44,12 @@ namespace CarForum.Controllers
 
                 if (addNewUser.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "user");
-                    if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                    if (await roleManager.RoleExistsAsync("User"))
+                    {
+                        await userManager.AddToRoleAsync(user, "User");
+                    }
+
+                    if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUsers", "Administration");
                     }

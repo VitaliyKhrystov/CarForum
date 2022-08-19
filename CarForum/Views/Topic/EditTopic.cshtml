@@ -3,7 +3,7 @@
 }
 @model TopicField;
 
-<form asp-controller="Home" asp-action="EditPost" method="post">
+<form asp-controller="Topic" asp-action="EditTopic" method="post">
     <div class="topic_edit">
         <div class="topic_edit_div">
             <label asp-for="QuestionShort">Topic (short)</label> <span asp-validation-for="QuestionShort" class="attribute_error"></span> <br>
@@ -15,7 +15,8 @@
             <textarea rows='1' asp-for="QuestionExtension" value="@Model.QuestionExtension"></textarea> <br>
         </div>
         <div class="topic_edit_div">
-            <input asp-for="@Model.Id" hidden />
+            <input asp-for="Id" hidden />
+            <input asp-for="UserId" hidden />
             <input type="submit" value="Save Changes" />
         </div>
     </div>

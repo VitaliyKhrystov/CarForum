@@ -1,0 +1,24 @@
+﻿@model CreateTopicViewModel
+@{
+    ViewData["Title"] = "Add Topic";
+}
+
+<form asp-controller="Topic" asp-action="CreateTopic" method="post" enctype="multipart/form-data">
+    <div class="topic_add">
+        <div class="topic_add_div">
+            <label asp-for="TopicShort">Topic (short)</label> <span asp-validation-for="TopicShort" class="attribute_error"></span> <br>
+            <input asp-for="TopicShort" type="text" maxlength="38" /> <br>
+
+        </div>
+        <div class="topic_add_div">
+            <label asp-for="TopicExtension">Topic (extension)</label> <span asp-validation-for="TopicExtension" class="attribute_error"></span> <br>
+            <textarea rows='1' asp-for="TopicExtension"></textarea> <br>
+        </div>
+        <div class="topic_add_file">
+            <input class="topic_add_file_upload" type="file" asp-for="UploadFile" accept=".jpg, .jpeg, .png" /> <br>
+        </div>
+        <div class="topic_add_div">
+            <input type="submit" name="name" value="Add Topic" />
+        </div>
+    </div>
+</form>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarForum.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,7 +13,14 @@ namespace CarForum.Domain.Entities
 
         [Required(ErrorMessage = "Response not specified!")]
         public string Reply { get; set; }
+
         public int TopicFieldID { get; set; }
         public TopicField TopicField { get; set; }
+
+        public string UserId { get; set; }
+        public User User { get; set; }
+
+        public DateTime ReplyData { get; set; }
+
     }
 }

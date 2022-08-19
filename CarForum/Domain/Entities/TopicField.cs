@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarForum.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,8 +16,17 @@ namespace CarForum.Domain.Entities
 
         [Required(ErrorMessage = "Extension topic not specified!")]
         public string QuestionExtension { get; set; }
+
         [Required(ErrorMessage = "Response not specified!")]
         public ICollection<Response> Responces { get; set; }
+
+        public string UserId { get; set; }
+        public User User { get; set; }
+
+        public DateTime TopicData { get; set; }
+        
+        public string ImageName { get; set; }
+
         public TopicField()
         {
             Responces = new List<Response>();
