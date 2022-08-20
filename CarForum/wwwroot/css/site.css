@@ -3,9 +3,7 @@
 *::after {
     margin: 0;
     padding: 0;
-    font-family: 'DM Sans', sans-serif;
-    font-family: 'Montserrat', sans-serif;
-  /*  font-family: 'Catamaran', sans-serif;*/
+    font-family: 'Anek Odia', sans-serif;
 }
 
 html,
@@ -16,6 +14,13 @@ body {
 body {
     display: flex;
     flex-flow: column;
+}
+p {
+    margin: 0;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 /*Header*/
@@ -39,12 +44,25 @@ header {
     align-items: center;
 }
 
+.header_nav_left a,
+.header_nav_right_login,
+.header_nav_right_register {
+    color: white;
+}
+
+.header_nav_left a:hover,
+.header_nav_right_login:hover,
+.header_nav_right_register:hover {
+    color: aqua;
+}
+
+
 .header_nav_right_exit {
     background-color: inherit;
     color: white;
     border: 1px solid white;
     border-radius: 10px;
-    padding: 3px 10px;
+    padding: 3px 10px 0 10px;
 }
 
 .header_nav_right_exit:hover {
@@ -62,7 +80,174 @@ li {
 a {
     text-decoration: none;
 }
-.header_nav_left a,
+
+/*Main*/
+.main_container {
+    flex: 1 1 auto;
+    /* height: auto;*/
+  /*  background: rgb(18,19,19);
+    background: linear-gradient(313deg, rgba(18,19,19,1) 0%, rgba(131,130,128,1) 100%);*/
+  background-color: white;
+}
+.main {
+    margin: 0 50px;
+    height: 100%;
+    font-size: 1.6rem;
+    color: white;
+}
+
+
+/*Index*/
+
+.forum {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.forum-title {
+    text-align: center;
+    color: black
+}
+
+.forum_add {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 210px;
+    text-align: center;
+    background-color: blue;
+}
+
+.forum_add_topic {
+    color: white;
+}
+
+.forum_add_topic:hover {
+    color:aqua;
+    text-decoration: none;
+}
+
+.forum_topic {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+    background-color: black;
+}
+
+.forum_topic_hat {
+    font-size: 23px;
+    border-bottom: 3px solid white;
+    text-align: center;
+    height: 65px;
+}
+
+.forum_topic_hat th:first-child {
+    width: 45%;
+}
+
+.forum_topic_hat th:nth-child(2) {
+    width: 16%;
+}
+
+.forum_topic_hat th:last-child {
+    width: 17%;
+}
+
+.forum_topic_body {
+    font-size: 16px;
+    height: 50px;
+    border: 1px dotted white;
+}
+
+.forum_topic_body td {
+    text-align: center;
+}
+
+
+.forum_topic_body td:first-child {
+    text-align: left;
+}
+
+
+.forum_topic_body_list_reply {
+    padding-left: 10px;
+    color: white;
+}
+
+.forum_topic_body_list_reply:hover {
+    color: aqua;
+    text-decoration: none;
+}
+
+.forum_topic_body_table_nav {
+    width: 100%;
+}
+
+.forum_topic_body_nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.forum_topic_body_nav td:first-child {
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 5px;
+    width: 75px;
+    text-align: center;
+    background-color: blue;
+    padding: 3px 0 2px 0;
+}
+
+.forum_topic_body_nav_reply {
+    color: white;
+}
+
+.forum_topic_body_nav_reply:hover {
+     color: aqua;
+}
+
+.forum_topic_body_nav td:nth-child(2) {
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 5px;
+    width: 75px;
+    text-align: center;
+    background-color: greenyellow;
+    padding: 3px 0 2px 0;
+}
+
+.forum_topic_body_nav_edit {
+    color: black;
+}
+
+.forum_topic_body_nav_edit:hover {
+    color: blueviolet;
+}
+
+.forum_topic_body_nav_form {
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 5px;
+    width: 75px;
+    text-align: center;
+    background-color: #FA4630;
+}
+
+.forum_topic_body_nav_form_submit {
+    background-color: inherit;
+    border: 0;
+    color: white;
+    padding: 4px 0;
+}
+
+.forum_topic_body_nav_form_submit:hover {
+    color: darkblue;
+}
+
+/*.forum_topic_body td:nth-child(3),
+.forum_topic_body td:nth-child(4) {
+    font-size: 12px;
+}*/
+/*.header_nav_left a,
 .header_nav_right_login,
 .header_nav_right_register,
 .login_nav_register,
@@ -73,8 +258,8 @@ a {
 .not_found_home_link {
     color: white;
 }
-
-.header_nav_left a:hover,
+*/
+/*.header_nav_left a:hover,
 .header_nav_right_login:hover,
 .header_nav_right_register:hover,
 .topic_add_div:last-child input:hover,
@@ -108,29 +293,6 @@ a {
 
 
 
-/*Main*/
-.main_container {
-    flex: 1 1 auto;
-    /* height: auto;*/
-    background: rgb(18,19,19);
-    background: linear-gradient(313deg, rgba(18,19,19,1) 0%, rgba(131,130,128,1) 100%);
-}
-.main {
-    margin: 0 50px;
-    height: 100%;
-    font-size: 1.6rem;
-    border: 5px solid;
-    padding: 1rem;
-    border-image: linear-gradient(to bottom, black, grey) 0 1;
-    color: white;
-}
-.forum {
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-.forum-title {
-   text-align:center;
-}
 
 .topic_add,
 .topic_edit,
@@ -204,28 +366,27 @@ a {
 
 .topic_add_file_upload:first-child {
     margin-bottom: 10px;
-}
-
-.forum_add,
-.list_users_add {
-    border: 5px solid grey;
-    border-style: inset;
+}*/
+/*.forum_add,*/
+/*.list_users_add {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
     border-radius: 10px;
     width: 210px;
     text-align: center;
+    background-color: aqua;
 }
 
 .forum_add_topic {
     color: white;
-}
-
-.forum_topic {
+}*/
+/*.forum_topic {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-}
-
-.forum_topic_title {
+}*/
+/*.forum_topic_title {
     margin-left: 25px;
 }
 
@@ -275,11 +436,9 @@ a {
 .listRole_box_action_delete_submit:hover,
 .list_users_item_nav_delete:hover {
     color: #F73697;
-}
-
+}*/
 /*Reply*/
-
-.reply{
+/*.reply{
     display:flex;
     flex-direction:column;
 }
@@ -349,19 +508,17 @@ a {
 .reply_nav_homepage {
     margin-left: 20px;
     padding: 6px 25px;
-}
-
+}*/
 /*Edit*/
-.edit_form_submit {
+/*.edit_form_submit {
     margin-top: 30px;
     width: 150px;
-}
-
+}*/
 /*Footer*/
 footer {
     flex: 0 1 50px;
     width: 100%;
-/*    height: 50px;*/
+    /*    height: 50px;*/
     background-color: black;
     color: white;
     text-align: center;
@@ -369,7 +526,7 @@ footer {
 
 /*Register*/
 
-.register_h1,
+/*.register_h1,
 .login_h1,
 .createRole_h1,
 .listRole_h1,
@@ -425,10 +582,10 @@ footer {
     color: white;
     border-style: inset;
     width: 180px;
-}
+}*/
 
 /*Login*/
-.login_remember {
+/*.login_remember {
     margin: 20px 0 15px 20px;
 }
 
@@ -462,11 +619,11 @@ footer {
 .role_user_nav_cancel:hover,
 .edit_user_nav_cancel:hover {
     text-decoration: none;
-}
+}*/
 
 /*Role*/
 
-.listRole_createRole {
+/*.listRole_createRole {
     border: 5px solid grey;
     border-style: inset;
     border-radius: 10px;
@@ -666,7 +823,7 @@ footer {
     color: white;
     background-color: inherit;
     margin-right: 20px;
-}
+}*/
 /*Validation error*/
 .attribute_error,
 .error_submit {

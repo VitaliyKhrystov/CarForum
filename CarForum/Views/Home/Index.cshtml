@@ -1,8 +1,9 @@
-﻿@model List<TopicField>
+﻿@model TopicResponseUserModel
 @inject UserManager<User> userManager
 
 @{
     ViewData["Title"] = "Home Page";
+    List<Response> responses;
 }
 
 <div class="forum">
@@ -13,30 +14,177 @@
     <a class="forum_add_topic" asp-controller="Topic" asp-action="CreateTopic">Add new topic</a>
 </div>
 
+
+
 <div class="forum_topic">
-    <p class="forum_topic_title">Topics list</p>
 
-    @foreach (var topic in Model)
-    {
-        <div class="forum_topic_list">
-            <div class="forum_topic_list_div">
+    <table>
+        <tr class="forum_topic_hat">
+            <th>Topic</th>
+            <th>User</th>
+            <th>Post</th>
+            <th>Update</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var topic in Model.Topics)
+        {
 
-                <p>@topic.UserId</p>
-                @{
-                    User user = await userManager.FindByIdAsync(topic.UserId);
-                    <p>@user.UserName</p>
+        <tr class="forum_topic_body">
+            <td>
+                <a class="forum_topic_body_list_reply" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
+            </td>
+
+
+            @foreach (var user in Model.Users)
+            {
+                if (user.Id == topic.UserId)
+                {
+                    <td>
+                        <p>@user.UserName</p>
+                    </td>
+                }
+            }
+
+            <td>
+                <p>@topic.TopicData</p>
+            </td>
+
+            @{
+                responses = new List<Response>();
+
+                foreach (var reply in Model.Responses)
+                {
+                    if (reply.TopicFieldID == topic.Id)
+                    {
+                        responses.Add(reply);
+                    }
                 }
 
+                if (responses.Count != 0)
+                {
+                    <td>
+                        <p>@responses.Last().ReplyData</p>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <p>@topic.TopicData</p>
+                    </td>
+                }
 
-                <a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
-            </div>
-            <a class="forum_topic_list_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
+              }
 
-            <form class="forum_topic_list_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
-                <button class="forum_topic_list_form_submit" type="submit">Delete</button>
-            </form>
-        </div>
-    }
+            <td>
+                <table class="forum_topic_body_table_nav">
+                    <tr class="forum_topic_body_nav">
+                        <td>
+                            <a class="forum_topic_body_nav_reply" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">Reply</a>
+                        </td>
+
+                        <td>
+                            <a class="forum_topic_body_nav_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
+                        </td>
+
+                        <td>
+                            <form class="forum_topic_body_nav_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
+                                <button class="forum_topic_body_nav_form_submit" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        }
+    </table>
 
 </div>
+
+@*<div class="forum_topic">
+
+        <table>
+            <tr class="forum_topic_hat">
+                <th>Topic</th>
+                <th>User</th>
+                <th>Post</th>
+                <th>Last Update</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var topic in Model.Topics)
+            {
+
+                User user = await userManager.FindByIdAsync(topic.UserId);
+
+                <tr>
+                    <td>
+                        <a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
+                    </td>
+
+                    <td>
+                        <p>@user.UserName</p>
+                    </td>
+
+                    <td>
+                        <p>@topic.TopicData</p>
+                    </td>
+
+                    <td>
+                        <p>@topic.TopicData</p>
+                    </td>
+
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">View</a>
+                                </td>
+
+                                <td>
+                                    <a class="forum_topic_list_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
+                                </td>
+
+                                <td>
+                                    <form class="forum_topic_list_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
+                                        <button class="forum_topic_list_form_submit" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>*@
+
+
+
+
+
+@*<div class="forum_topic">
+        <p class="forum_topic_title">Topics list</p>
+
+        @foreach (var topic in Model)
+        {
+            <div class="forum_topic_list">
+                <div class="forum_topic_list_div">
+
+                    <p>@topic.UserId</p>
+                    @{
+                        User user = await userManager.FindByIdAsync(topic.UserId);
+                        <p>@user.UserName</p>
+                    }
+
+
+                    <a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
+                </div>
+                <a class="forum_topic_list_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
+
+                <form class="forum_topic_list_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
+                    <button class="forum_topic_list_form_submit" type="submit">Delete</button>
+                </form>
+            </div>
+        }
+
+    </div>*@
 

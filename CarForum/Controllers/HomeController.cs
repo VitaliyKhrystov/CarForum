@@ -1,30 +1,43 @@
 ﻿using CarForum.Domain;
+using CarForum.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CarForum.Controllers
 {
-    [Authorize(Roles = "Admin, User")]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private DataManager dataManager;
+        private readonly UserManager<User> userManager;
 
-        public HomeController(ILogger<HomeController> logger, DataManager dataManager)
+        public HomeController(ILogger<HomeController> logger, DataManager dataManager, UserManager<User> userManager)
         {
             _logger = logger;
             this.dataManager = dataManager;
+            this.userManager = userManager;
         }
 
-
-        [AllowAnonymous]
+        [HttpGet]
         public IActionResult Index()
         {
-            var topic = dataManager.EFTopicFields.GetTopic().ToList();
+            var topics = dataManager.EFTopicFields.GetTopic().ToList();
+            var responses = dataManager.EFResponses.GetResponse().ToList();
+            var users = userManager.Users.ToList();
 
-            return View(topic);
+            TopicResponseUserModel model = new TopicResponseUserModel()
+            {
+                Topics = topics,
+                Responses = responses,
+                Users = users
+            };
+
+            return View(model);
         }
 
     }
