@@ -23,6 +23,27 @@ a:hover {
     text-decoration: none;
 }
 
+label {
+    margin-bottom: 0;
+}
+
+/*Main*/
+.main_container {
+    flex: 1 1 auto;
+    /* height: auto;*/
+    /*  background: rgb(18,19,19);
+    background: linear-gradient(313deg, rgba(18,19,19,1) 0%, rgba(131,130,128,1) 100%);*/
+    background-color: grey;
+}
+
+.main {
+    margin: 0 50px;
+    height: 100%;
+    font-size: 1.6rem;
+    color: white;
+}
+
+
 /*Header*/
 
 header {
@@ -79,21 +100,6 @@ li {
 
 a {
     text-decoration: none;
-}
-
-/*Main*/
-.main_container {
-    flex: 1 1 auto;
-    /* height: auto;*/
-  /*  background: rgb(18,19,19);
-    background: linear-gradient(313deg, rgba(18,19,19,1) 0%, rgba(131,130,128,1) 100%);*/
-  background-color: white;
-}
-.main {
-    margin: 0 50px;
-    height: 100%;
-    font-size: 1.6rem;
-    color: white;
 }
 
 
@@ -241,6 +247,97 @@ a {
 
 .forum_topic_body_nav_form_submit:hover {
     color: darkblue;
+}
+
+
+/*CreateTopic*/
+
+.create_topic {
+    margin-top: 40px;
+    text-align:center;
+    color: black;
+}
+
+.topic_add {
+    margin: 75px 0 30px 0;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.topic_add_div_short {
+    padding: 30px 0 0 30px;
+}
+
+.topic_add_div_short label,
+.topic_add_div_extension label {
+    font-size: 30px;
+}
+
+.topic_add_div_short input {
+    font-size: 30px;
+    width: 70%;
+    height: 50px;
+    padding: 4px 0 0 10px;
+    border-radius: 10px;
+}
+
+
+.topic_add_div_extension {
+    padding: 30px 0 0 30px;
+}
+
+.topic_add_div_extension textarea {
+    font-size: 30px;
+    width: 70%;
+    min-height: 50px;
+    overflow: hidden;
+    padding: 4px 10px 0 10px;
+    border-radius: 10px;
+}
+
+.topic_add_file {
+    margin: 20px 0 30px 30px;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: 53px;
+    padding: 0 35px;
+    overflow: hidden;
+    color: black;
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: 300ms;
+    border-width: 0;
+    border-radius: 10px;
+    font-weight: 700;
+    line-height: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: white;
+}
+
+.topic_add_file span {
+    padding-top: 10px;
+}
+
+.topic_add_div_submit {
+    padding: 20px 0 30px 30px;
+}
+
+.topic_add_div_submit input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 210px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+}
+
+.topic_add_div_submit input:hover {
+    color:aqua;
 }
 
 /*.forum_topic_body td:nth-child(3),

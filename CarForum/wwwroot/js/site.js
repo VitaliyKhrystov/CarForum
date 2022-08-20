@@ -25,3 +25,9 @@ function checkParams() {
     }
 }
 
+//Add title to button
+
+function uploadFile(e) {
+    console.log(e)
+    e.parentElement.querySelector('span').innerHTML = e?.files?.[0]?.name
+}

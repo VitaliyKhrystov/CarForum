@@ -5,11 +5,31 @@
     var imagePath = "~/img/UserFiles/" + Model.TopicField.ImageName;
 }
 
-<div class="reply">
+<div class="topic_info">
+    <div class="topic_created">
+
+    </div>
+    <div class="topic_info">
+        <div class="topic_author">
+
+        </div>
+        <div class="topic_question">
+
+        </div>
+    </div>
+</div>
+
+
+@*<div class="reply">
     <div class="reply_topic">
         <p class="reply_topic_short">@Model.TopicField.QuestionShort</p>
         <p class="reply_topic_extension">@Model.TopicField.QuestionExtension</p>
-        <a href="~/img/UserFiles/@Model.TopicField.ImageName"><img src="@imagePath" asp-append-version="true" alt="Alternate Text" style="width: 50px; height: 50px;" /></a>
+
+        @if (@Model.TopicField.ImageName != null)
+        {
+            <a href="~/img/UserFiles/@Model.TopicField.ImageName"><img src="@imagePath" asp-append-version="true" alt="Image" style="width: 50px; height: 50px;" /></a>
+        }
+
     </div>
 
     <div class="reply_field">
@@ -17,13 +37,13 @@
         {
             @foreach (var item in Model.Responces)
             {
-            <div class="reply_field_list">
-                <p class="reply_field_extension">@item.Reply</p>
-                <a class="reply_field_edit" asp-controller="Topic" asp-action="EditReply" asp-route-id="@item.Id">Edit</a>
-                <form class="reply_field_form" asp-action="DeleteReply" asp-route-id="@item.Id" method="post">
-                    <button class="reply_field_form_submit" type="submit">Delete</button>
-                </form>
-            </div>
+                <div class="reply_field_list">
+                    <p class="reply_field_extension">@item.Reply</p>
+                    <a class="reply_field_edit" asp-controller="Topic" asp-action="EditReply" asp-route-id="@item.Id">Edit</a>
+                    <form class="reply_field_form" asp-action="DeleteReply" asp-route-id="@item.Id" method="post">
+                        <button class="reply_field_form_submit" type="submit">Delete</button>
+                    </form>
+                </div>
             }
         }
     </div>
@@ -40,4 +60,4 @@
 
         </form>
     </div>
-</div>
+</div>*@

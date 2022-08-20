@@ -125,24 +125,54 @@ namespace CarForum.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
         [HttpGet]
         public async Task<ActionResult> CreateReply(int id)
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
-            topicResponseModel.TopicField = topicField;
+            List<User> users = new List<User>();
 
-            foreach (var item in context.Responses)
+            foreach (var reply in dataManager.EFResponses.GetResponse().ToList())
             {
-                if (item.TopicFieldID == id)
+                if (reply.TopicFieldID == id)
                 {
-                    responses.Add(item);
+                    responses.Add(reply);
                 }
             }
 
-            topicResponseModel.Responces = responses;
+            foreach (var user in userManager.Users)
+            {
+                if (user.Id == topicField.UserId)
+                {
+                    users.Add(user);
+                }
+            }
 
-            return View(topicResponseModel);
+            TopicResponseUserModel model = new TopicResponseUserModel()
+            {
+                Topics = new List<TopicField>() { topicField },
+                Responses = responses,
+                Users = users
+            };
+
+            return View(model);
+
+            //topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
+
+            //topicResponseModel.TopicField = topicField;
+
+            //foreach (var item in context.Responses)
+            //{
+            //    if (item.TopicFieldID == id)
+            //    {
+            //        responses.Add(item);
+            //    }
+            //}
+
+            //topicResponseModel.Responces = responses;
+
+            //return View(topicResponseModel);
         }
 
         [HttpPost]
