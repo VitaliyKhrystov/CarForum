@@ -6,10 +6,15 @@
     string reply = default;
 }
 
+<div class="edit_reply">
+    <h1 class="dit_reply_h1">Edit Response</h1>
+</div>
+
+
 <div class="edit">
     <div class="edit_topic">
-        <p class="edit_topic_short">@Model.TopicField.QuestionShort</p>
-        <p class="edit_topic_extension">@Model.TopicField.QuestionExtension</p>
+        <p class="edit_topic_short">Topic (short): @Model.TopicField.QuestionShort</p>
+        <p class="edit_topic_extension">Topic (extension): @Model.TopicField.QuestionExtension</p>
     </div>
 
     @foreach (var item in Model.Responces)
@@ -18,11 +23,12 @@
         topicFieldID = item.TopicFieldID;
         reply = item.Reply;
     }
-<form class="edit_form" asp-controller="Topic" asp-action="EditReply" method="post">
-    <textarea class="edit_form_response" rows='1' asp-for="@reply" placeholder="" onkeyup="checkParams()" required></textarea> <br>
-    <input asp-for="@ID" hidden />
-    <input asp-for="@topicFieldID" hidden />
-    <input class="edit_form_submit" type="submit" value="Save" />
-</form>
+    <form class="edit_form" asp-controller="Topic" asp-action="EditReply" method="post">
+        <textarea class="edit_form_response" rows='1' asp-for="@reply" placeholder="" onkeyup="checkParams()" required></textarea> <br>
+        <input asp-for="@ID" hidden />
+        <input asp-for="@topicFieldID" hidden />
+        <input class="edit_form_submit" type="submit" value="Save" />
+        <a class="edit_form_back" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@Model.TopicField.Id">Back</a>
+    </form>
 
 </div>
