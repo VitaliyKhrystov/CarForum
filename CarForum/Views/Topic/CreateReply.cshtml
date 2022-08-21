@@ -1,63 +1,183 @@
-﻿@model TopicResponseModel
+﻿@model TopicResponsesUsersViewModel
 @{
     ViewData["Title"] = "Reply";
-    int id = Model.TopicField.Id;
-    var imagePath = "~/img/UserFiles/" + Model.TopicField.ImageName;
+    int id = Model.Topic.Id;
+    var imagePath = "~/img/UserFiles/" + Model.Topic.ImageName;
 }
 
-<div class="topic_info">
-    <div class="topic_created">
 
-    </div>
+
+<div class="topic">
+
+    <p class="topic_created">Post: @Model.Topic.TopicData</p>
+
     <div class="topic_info">
         <div class="topic_author">
-
+            <ul>
+                @foreach (var user in Model.Users)
+                {
+                    if (user.Id == Model.Topic.UserId)
+                    {
+                        <li>@user.UserName</li>
+                        <li>Join Date: @user.Date</li>
+                    }
+                }
+            </ul>
         </div>
         <div class="topic_question">
-
+            <p class="reply_topic_short">Topic (short): @Model.Topic.QuestionShort</p>
+            <p class="reply_topic_extension">Topic (extension): @Model.Topic.QuestionExtension</p>
         </div>
+        @if (@Model.Topic.ImageName != null)
+        {
+            <div class="topic_image">
+                <a href="~/img/UserFiles/@Model.Topic.ImageName"><img src="@imagePath" asp-append-version="true" alt="Image" style="width: 100%;" /></a>
+            </div>
+        }
     </div>
 </div>
 
+<div class="reply_area">
+    <form asp-controller="Topic" asp-action="CreateReply" method="post">
+        <input hidden asp-for="@id" />
 
-@*<div class="reply">
-    <div class="reply_topic">
-        <p class="reply_topic_short">@Model.TopicField.QuestionShort</p>
-        <p class="reply_topic_extension">@Model.TopicField.QuestionExtension</p>
+        <textarea class="reply_area_text" rows='1' name="Reply" onkeyup="checkParams()" required></textarea> <br>
 
-        @if (@Model.TopicField.ImageName != null)
-        {
-            <a href="~/img/UserFiles/@Model.TopicField.ImageName"><img src="@imagePath" asp-append-version="true" alt="Image" style="width: 50px; height: 50px;" /></a>
-        }
+        <div class="reply_nav">
+            <input class="reply_nav_submit" type="submit" value="Reponse" />
+            <a class="reply_nav_homepage" asp-controller="Home" , asp-action="Index">Home page</a>
+        </div>
+
+    </form>
+</div>
+
+
+@if (Model.Responses != null)
+{
+    <div class="reply_field">
+        <table>
+            <tr class="reply_field_hat">
+                <th>Response</th>
+                <th>User</th>
+                <th>Join Date</th>
+                <th>Post</th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var reply in Model.Responses)
+            {
+                <tr class="reply_field_body">
+
+                    <td>@reply.Reply</td>
+
+                    @foreach (var user in Model.Users)
+                    {
+                        if (user.Id == reply.UserId)
+                        {
+                            <td class="reply_field_body_username">@user.UserName</td>
+                            <td class="reply_field_body_userdata">@user.Date</td>
+                        }
+                    }
+                    <td class="reply_field_body_replydata">@reply.ReplyData</td>
+
+                    <td class="reply_field_action">
+                        <table class="reply_field_body_table">
+                            <tr class="reply_field_body_action">
+                                <td>
+                                    <a class="reply_field_edit" asp-controller="Topic" asp-action="EditReply" asp-route-id="@reply.Id">Edit</a>
+                                </td>
+                                <td>
+                                    <form class="reply_field_form" asp-action="DeleteReply" asp-route-id="@reply.Id" method="post">
+                                        <button class="reply_field_form_submit" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </table>
 
     </div>
+}
 
-    <div class="reply_field">
-        @if (Model.Responces != null)
-        {
-            @foreach (var item in Model.Responces)
+
+
+
+
+@*@foreach (var reply in Model.Responses)
             {
+                <p class="reply_created">Post: @reply.ReplyData</p>
+
                 <div class="reply_field_list">
-                    <p class="reply_field_extension">@item.Reply</p>
-                    <a class="reply_field_edit" asp-controller="Topic" asp-action="EditReply" asp-route-id="@item.Id">Edit</a>
-                    <form class="reply_field_form" asp-action="DeleteReply" asp-route-id="@item.Id" method="post">
-                        <button class="reply_field_form_submit" type="submit">Delete</button>
-                    </form>
+                    <div class="reply_field_author">
+                        <ul>
+                            @foreach (var user in Model.Users)
+                            {
+                                if (user.Id == reply.UserId)
+                                {
+                                    <li>@user.UserName</li>
+                                    <li>@user.Date</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="reply_field_extension">
+                        <p class="reply_field_topic_short"># @Model.Topic.QuestionShort</p>
+                        <p class="reply_field_extension">@reply.Reply</p>
+                    </div>
+
+                    <div class="reply_field_action">
+                        <a class="reply_field_edit" asp-controller="Topic" asp-action="EditReply" asp-route-id="@reply.Id">Edit</a>
+                        <form class="reply_field_form" asp-action="DeleteReply" asp-route-id="@reply.Id" method="post">
+                            <button class="reply_field_form_submit" type="submit">Delete</button>
+                        </form>
+                    </div>
+
                 </div>
             }
         }
-    </div>
-    <div class="reply_area">
-        <form asp-controller="Topic" asp-action="CreateReply" method="post">
-            <input hidden asp-for="@id" />
+    </div>*@
 
-            <textarea class="reply_area_text" rows='1' name="Reply" onkeyup="checkParams()" required></textarea> <br>
+@*<div class="reply">
+        <div class="reply_topic">
+            <p class="reply_topic_short">@Model.TopicField.QuestionShort</p>
+            <p class="reply_topic_extension">@Model.TopicField.QuestionExtension</p>
 
-            <div class="reply_nav">
-                <input class="reply_nav_submit" type="submit" value="Reponse" />
-                <a class="reply_nav_homepage" asp-controller="Home" , asp-action="Index">Home page</a>
-            </div>
+            @if (@Model.TopicField.ImageName != null)
+            {
+                <a href="~/img/UserFiles/@Model.TopicField.ImageName"><img src="@imagePath" asp-append-version="true" alt="Image" style="width: 50px; height: 50px;" /></a>
+            }
 
-        </form>
-    </div>
-</div>*@
+        </div>
+
+        <div class="reply_field">
+            @if (Model.Responces != null)
+            {
+                @foreach (var item in Model.Responces)
+                {
+                    <div class="reply_field_list">
+                        <p class="reply_field_extension">@item.Reply</p>
+                        <a class="reply_field_edit" asp-controller="Topic" asp-action="EditReply" asp-route-id="@item.Id">Edit</a>
+                        <form class="reply_field_form" asp-action="DeleteReply" asp-route-id="@item.Id" method="post">
+                            <button class="reply_field_form_submit" type="submit">Delete</button>
+                        </form>
+                    </div>
+                }
+            }
+        </div>
+        <div class="reply_area">
+            <form asp-controller="Topic" asp-action="CreateReply" method="post">
+                <input hidden asp-for="@id" />
+
+                <textarea class="reply_area_text" rows='1' name="Reply" onkeyup="checkParams()" required></textarea> <br>
+
+                <div class="reply_nav">
+                    <input class="reply_nav_submit" type="submit" value="Reponse" />
+                    <a class="reply_nav_homepage" asp-controller="Home" , asp-action="Index">Home page</a>
+                </div>
+
+            </form>
+        </div>
+    </div>*@

@@ -131,8 +131,6 @@ namespace CarForum.Controllers
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
-            List<User> users = new List<User>();
-
             foreach (var reply in dataManager.EFResponses.GetResponse().ToList())
             {
                 if (reply.TopicFieldID == id)
@@ -141,19 +139,11 @@ namespace CarForum.Controllers
                 }
             }
 
-            foreach (var user in userManager.Users)
+            var model = new TopicResponsesUsersViewModel()
             {
-                if (user.Id == topicField.UserId)
-                {
-                    users.Add(user);
-                }
-            }
-
-            TopicResponseUserModel model = new TopicResponseUserModel()
-            {
-                Topics = new List<TopicField>() { topicField },
+                Topic = topicField,
                 Responses = responses,
-                Users = users
+                Users = userManager.Users.ToList()
             };
 
             return View(model);
