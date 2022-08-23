@@ -3,15 +3,18 @@
 }
 @model IEnumerable<IdentityRole>
 
-<div class="listRole">
-    <h1 class="listRole_h1">List Roles</h1>
 
-    <div class="listRole_createRole">
-        <a class="listRole_createRole_link" asp-controller="Administration" asp-action="CreateRole">Create Role</a>
-    </div>
+<div class="listrole_page">
+    <h1 class="listRole_h1">List Roles</h1>
+</div>
+   
+
+<div class="listRole_createRole">
+    <a class="listRole_createRole_link" asp-controller="Administration" asp-action="CreateRole">Create Role</a>
+</div>
   
 
-
+<div class="listRole">
     @if (Model.Any())
     {
 
@@ -26,8 +29,8 @@
                 <div class="listRole_box_action">
                     <a class="listRole_box_action_edit" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
                     <form class="listRole_box_action_delete" method="post">
-                        <input class="listRole_box_action_delete_submit" type="submit" asp-controller="Administration" asp-action="DeleteRole" 
-                               asp-route-id="@role.Id" value="Delete" onclick="return confirm('Are you sure you want to delete role: @role.Name')"/>
+                        <input class="listRole_box_action_delete_submit" type="submit" asp-controller="Administration" asp-action="DeleteRole"
+                                asp-route-id="@role.Id" value="Delete" onclick="return confirm('Are you sure you want to delete role: @role.Name')" />
                     </form>
                 </div>
             </div>

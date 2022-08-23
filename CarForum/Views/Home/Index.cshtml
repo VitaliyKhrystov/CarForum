@@ -29,72 +29,72 @@
         @foreach (var topic in Model.Topics)
         {
 
-        <tr class="forum_topic_body">
-            <td>
-                <a class="forum_topic_body_list_reply" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
-            </td>
+            <tr class="forum_topic_body">
+                <td>
+                    <a class="forum_topic_body_list_reply" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
+                </td>
 
 
-            @foreach (var user in Model.Users)
-            {
-                if (user.Id == topic.UserId)
+                @foreach (var user in Model.Users)
                 {
-                    <td>
-                        <p>@user.UserName</p>
-                    </td>
-                }
-            }
-
-            <td>
-                <p>@topic.TopicData</p>
-            </td>
-
-            @{
-                responses = new List<Response>();
-
-                foreach (var reply in Model.Responses)
-                {
-                    if (reply.TopicFieldID == topic.Id)
+                    if (user.Id == topic.UserId)
                     {
-                        responses.Add(reply);
+                        <td>
+                            <p>@user.UserName</p>
+                        </td>
                     }
                 }
 
-                if (responses.Count != 0)
-                {
-                    <td>
-                        <p>@responses.Last().ReplyData</p>
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        <p>@topic.TopicData</p>
-                    </td>
-                }
+                <td>
+                    <p>@topic.TopicData</p>
+                </td>
 
-              }
+                @{
+                    responses = new List<Response>();
 
-            <td>
-                <table class="forum_topic_body_table_nav">
-                    <tr class="forum_topic_body_nav">
+                    foreach (var reply in Model.Responses)
+                    {
+                        if (reply.TopicFieldID == topic.Id)
+                        {
+                            responses.Add(reply);
+                        }
+                    }
+
+                    if (responses.Count != 0)
+                    {
                         <td>
-                            <a class="forum_topic_body_nav_reply" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">Reply</a>
+                            <p>@responses.Last().ReplyData</p>
                         </td>
-
+                    }
+                    else
+                    {
                         <td>
-                            <a class="forum_topic_body_nav_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
+                            <p>@topic.TopicData</p>
                         </td>
+                    }
 
-                        <td>
-                            <form class="forum_topic_body_nav_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
-                                <button class="forum_topic_body_nav_form_submit" type="submit">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+                  }
+
+                <td>
+                    <table class="forum_topic_body_table_nav">
+                        <tr class="forum_topic_body_nav">
+                            <td>
+                                <a class="forum_topic_body_nav_reply" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">Reply</a>
+                            </td>
+
+                            <td>
+                                <a class="forum_topic_body_nav_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
+                            </td>
+
+                            <td>
+                                <form class="forum_topic_body_nav_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
+                                    <button class="forum_topic_body_nav_form_submit" type="submit" onclick="return confirm('Are you sure you want to delete topic: @topic.QuestionShort')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
         }
     </table>
 

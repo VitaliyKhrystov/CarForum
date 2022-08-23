@@ -131,7 +131,6 @@ a {
 
 .forum_add_topic:hover {
     color:aqua;
-    text-decoration: none;
 }
 
 .forum_topic {
@@ -871,6 +870,98 @@ a {
     color: blueviolet;
 }
 
+
+/*List Roles*/
+
+.listrole_page {
+    margin-top: 40px;
+    text-align: center;
+    color: black;
+}
+
+.listRole_createRole {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 210px;
+    text-align: center;
+    background-color: blue;
+    margin-top: 50px;
+}
+
+.listRole_createRole_link {
+    color: white;
+}
+
+.listRole_createRole_link:hover {
+    color: aqua;
+}
+
+.listRole {
+    margin: 40px 0 30px 0;
+}
+
+.listRole_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 20px;
+}
+
+.listRole_box_role {
+    flex-grow: 1;
+    font-size: 30px;
+}
+
+.listRole_box_name {
+    width: 70%;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 5px 0 5px;
+}
+
+.listRole_box_action {
+    font-size: 25px;
+    display: flex;
+    flex-direction: row;
+}
+
+.listRole_box_action_edit {
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 5px;
+    width: 75px;
+    text-align: center;
+    background-color: greenyellow;
+    margin-right: 20px;
+    padding: 3px 0 2px 0;
+    color: black;
+    width: 100px;
+}
+
+.listRole_box_action_edit:hover {
+    color: blueviolet;
+}
+
+.listRole_box_action_delete_submit {
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 5px;
+    width: 100px;
+    text-align: center;
+    background-color: #FA4630;
+    border: 0;
+    color: white;
+    padding: 4px 0;
+}
+
+.listRole_box_action_delete_submit:hover {
+    color: darkblue;
+}
 /*.forum_topic_body td:nth-child(3),
 .forum_topic_body td:nth-child(4) {
     font-size: 12px;
