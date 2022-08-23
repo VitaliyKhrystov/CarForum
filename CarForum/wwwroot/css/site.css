@@ -275,7 +275,7 @@ a {
 
 .topic_add_div_short input {
     font-size: 30px;
-    width: 70%;
+    width: 80%;
     height: 50px;
     padding: 4px 0 0 10px;
     border-radius: 10px;
@@ -288,7 +288,7 @@ a {
 
 .topic_add_div_extension textarea {
     font-size: 30px;
-    width: 70%;
+    width: 80%;
     min-height: 50px;
     overflow: hidden;
     padding: 4px 10px 0 10px;
@@ -317,6 +317,10 @@ a {
     background-color: white;
 }
 
+.topic_add_file:hover {
+    color: aqua;
+}
+
 .topic_add_file span {
     padding-top: 10px;
 }
@@ -340,9 +344,117 @@ a {
     color:aqua;
 }
 
+/*Edit Topic*/
+
+.topic-title {
+    margin-top: 40px;
+    text-align: center;
+    color: black;
+}
+
+.topic_edit {
+    margin: 75px 0 30px 0;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.topic_edit_short,
+.topic_edit_extension {
+    padding: 30px 0 0 30px;
+}
+
+.topic_edit_short label,
+.topic_edit_extension label {
+    font-size: 30px;
+}
+
+.topic_edit_short input {
+    font-size: 30px;
+    width: 80%;
+    height: 50px;
+    padding: 4px 0 0 10px;
+    border-radius: 10px;
+}
+
+.topic_edit_extension textarea {
+    font-size: 30px;
+    width: 80%;
+    min-height: 50px;
+    overflow: hidden;
+    padding: 4px 10px 0 10px;
+    border-radius: 10px;
+}
+
+.edit_topic_file {
+    width: 130px;
+    padding: 30px 0 0 30px;
+}
+
+.edit_topic_file_image {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.edit_topic_add_file {
+    margin: 20px 0 30px 30px;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: 53px;
+    padding: 8px 35px 0 35px;
+    overflow: hidden;
+    color: black;
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: 300ms;
+    border-width: 0;
+    border-radius: 10px;
+    font-weight: 700;
+    line-height: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: white;
+}
+
+.edit_topic_add_file:hover {
+    color: aqua;
+}
+
+.topic_edit_nav {
+    padding: 10px 0 30px 30px;
+}
+
+.topic_edit_nav_save {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+}
+
+.topic_edit_nav_save:hover {
+    color: aqua;
+}
+
+.topic_edit_nav_back {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    border-radius: 10px;
+    background-color: greenyellow;
+    color: black;
+    margin-left: 20px;
+    padding: 12px 70px;
+}
+
+.topic_edit_nav_back:hover {
+    color: blueviolet;
+}
 
 /*Create Reply*/
-
 .topic {
     margin: 50px 0 5px 0;
     background-color: black;
@@ -573,7 +685,7 @@ a {
 
 .edit_form_response {
     font-size: 25px;
-    padding: 0 10px;
+    padding: 4px 10px 0 10px;
     width: 100%;
     border-radius: 10px;
     overflow: hidden;

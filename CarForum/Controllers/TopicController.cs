@@ -89,6 +89,16 @@ namespace CarForum.Controllers
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
+            //IFormFile file = new FormFile() { FileName = topicField.ImageName}
+
+            //CreateTopicViewModel model = new CreateTopicViewModel()
+            //{
+            //    TopicShort = topicField.QuestionShort,
+            //    TopicExtension = topicField.QuestionExtension,
+            //    UploadFile = 
+            //};
+
+
             if (topicField != null)
             {
                 return View(topicField);
@@ -101,6 +111,11 @@ namespace CarForum.Controllers
         public async Task<ActionResult> EditTopic(TopicField _topicField)
         {
             dataManager.EFTopicFields.UpdateTopic(_topicField);
+
+
+
+
+
             await dataManager.EFTopicFields.SaveTopicAsync();
 
             return RedirectToAction("Index", "Home");
@@ -148,21 +163,6 @@ namespace CarForum.Controllers
 
             return View(model);
 
-            //topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
-
-            //topicResponseModel.TopicField = topicField;
-
-            //foreach (var item in context.Responses)
-            //{
-            //    if (item.TopicFieldID == id)
-            //    {
-            //        responses.Add(item);
-            //    }
-            //}
-
-            //topicResponseModel.Responces = responses;
-
-            //return View(topicResponseModel);
         }
 
         [HttpPost]
