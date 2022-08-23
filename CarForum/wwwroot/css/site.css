@@ -250,11 +250,96 @@ a {
 }
 
 
-/*CreateTopic*/
+/*Login*/
 
+.login {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 40px 0;
+}
+
+.login_area {
+   background-color: black;
+   border-radius: 10px;
+   width: 550px;
+}
+
+.login_h1 {
+    padding: 30px 0 0 20px;
+}
+
+.login_email {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0 0 20px;
+}
+
+
+.login_email_label,
+.login_password_label {
+    font-size: 25px;
+}
+
+.login_email_input,
+.login_password_input {
+    width: 90%;
+    border-radius: 10px;
+    padding: 3px 5px 0 5px;
+}
+
+.login_password {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0 0 20px;
+}
+
+.login_remember {
+    font-size: 25px;
+    padding: 25px 0 0 20px;
+}
+
+.login_remember label {
+    margin-right: 10px;
+}
+
+.login_nav {
+    padding: 25px 0 25px 20px;
+}
+
+.login_nav_submit {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+}
+
+.login_nav_submit:hover {
+    color: aqua;
+}
+
+.login_nav_register {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    border-radius: 10px;
+    background-color: greenyellow;
+    color: black;
+    margin-left: 20px;
+    padding: 12px 26px;
+}
+
+.login_nav_register:hover {
+    color: blueviolet;
+}
+
+/*CreateTopic*/
 .create_topic {
     margin-top: 40px;
-    text-align:center;
+    text-align: center;
     color: black;
 }
 
@@ -280,7 +365,6 @@ a {
     padding: 4px 0 0 10px;
     border-radius: 10px;
 }
-
 
 .topic_add_div_extension {
     padding: 30px 0 0 30px;
