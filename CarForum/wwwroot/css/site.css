@@ -30,8 +30,7 @@ label {
 /*Main*/
 .main_container {
     flex: 1 1 auto;
-    /*    background-color: #ffff80;*/
-    background-color: #c1d5e0;
+    background-color: #E6E8E6;
 }
 
 .main {
@@ -131,7 +130,7 @@ a {
 
 .forum-title {
     text-align: center;
-    color: black
+    color: #616161
 }
 
 .forum_add {
@@ -141,7 +140,7 @@ a {
     border-radius: 10px;
     width: 210px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
 }
 
 .forum_add_topic {
@@ -156,7 +155,7 @@ a {
     display: flex;
     flex-direction: column;
     margin: 30px 0;
-    background-color: black;
+    background-color: #616161;
 }
 
 .forum_topic_hat {
@@ -219,7 +218,7 @@ a {
     border-radius: 5px;
     width: 75px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     padding: 3px 0 2px 0;
 }
 
@@ -241,7 +240,7 @@ a {
 }
 
 .forum_topic_body_nav_edit {
-    color: black;
+    color: #616161;
 }
 
 .forum_topic_body_nav_edit:hover {
@@ -253,7 +252,7 @@ a {
     border-radius: 5px;
     width: 75px;
     text-align: center;
-    background-color: #FA4630;
+    background-color: #DF2935;
 }
 
 .forum_topic_body_nav_form_submit {
@@ -278,7 +277,7 @@ a {
 }
 
 .register_area {
-    background-color: black;
+    background-color: #616161;
     border-radius: 10px;
     width: 550px;
 }
@@ -324,8 +323,9 @@ a {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .register_submit_input:hover {
@@ -342,7 +342,7 @@ a {
 }
 
 .login_area {
-   background-color: black;
+   background-color: #616161;
    border-radius: 10px;
    width: 550px;
 }
@@ -396,8 +396,9 @@ a {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .login_nav_submit:hover {
@@ -409,7 +410,7 @@ a {
     font-size: 25px;
     border-radius: 10px;
     background-color: greenyellow;
-    color: black;
+    color: #616161;
     margin-left: 20px;
     padding: 12px 26px;
 }
@@ -422,12 +423,12 @@ a {
 .create_topic {
     margin-top: 40px;
     text-align: center;
-    color: black;
+    color: #616161;
 }
 
 .topic_add {
     margin: 75px 0 30px 0;
-    background-color: black;
+    background-color: #616161;
     border-radius: 10px;
 }
 
@@ -446,6 +447,7 @@ a {
     height: 50px;
     padding: 4px 0 0 10px;
     border-radius: 10px;
+    border: 0;
 }
 
 .topic_add_div_extension {
@@ -462,7 +464,7 @@ a {
 }
 
 .topic_add_file {
-    margin: 20px 0 30px 30px;
+    margin: 30px 0 20px 30px;
     display: inline-flex;
     position: relative;
     align-items: center;
@@ -470,7 +472,7 @@ a {
     height: 53px;
     padding: 0 35px;
     overflow: hidden;
-    color: black;
+    color: #616161;
     cursor: pointer;
     transition-property: all;
     transition-duration: 300ms;
@@ -502,8 +504,9 @@ a {
     border-radius: 10px;
     width: 210px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .topic_add_div_submit input:hover {
@@ -515,14 +518,14 @@ a {
 .topic-title {
     margin-top: 40px;
     text-align: center;
-    color: black;
+    color: #616161;
 }
 
 .topic_edit {
     display:flex;
     flex-direction: column;
     margin: 75px 0 30px 0;
-    background-color: black;
+    background-color: #616161;
     border-radius: 10px;
 }
 
@@ -569,7 +572,7 @@ a {
     border-radius: 5px;
     width: 200px;
     text-align: center;
-    background-color: #FA4630;
+    background-color: #DF2935;
     border: 0;
     color: white;
     padding: 5px 0;
@@ -594,7 +597,7 @@ a {
     height: 53px;
     padding: 8px 10px 0 10px;
     overflow: hidden;
-    color: black;
+    color: #616161;
     cursor: pointer;
     transition-property: all;
     transition-duration: 300ms;
@@ -623,8 +626,9 @@ a {
     border-radius: 10px;
     width: 200px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .topic_edit_nav_save:hover {
@@ -636,7 +640,7 @@ a {
     font-size: 25px;
     border-radius: 10px;
     background-color: greenyellow;
-    color: black;
+    color: #616161;
     margin-left: 20px;
     padding: 12px 70px;
 }
@@ -648,8 +652,8 @@ a {
 /*Create Reply*/
 .topic {
     margin: 50px 0 5px 0;
-    background-color: black;
-    border: 1px solid black;
+    background-color: #616161;
+    border: 1px solid #616161;
     border-radius: 10px;
 }
 
@@ -675,7 +679,7 @@ a {
 .topic_question {
     min-width: 77%;
     color: white;
-    background-color: black;
+    background-color: #616161;
     padding: 5px 0 0 10px;
 }
 
@@ -686,7 +690,7 @@ a {
 
 
 .reply_area {
-    background-color: black;
+    background-color: #616161;
     margin-bottom: 80px;
     min-height: 150px;
     border-radius: 10px
@@ -716,8 +720,9 @@ a {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .reply_nav_submit:hover {
@@ -729,7 +734,7 @@ a {
     font-size: 25px;
     border-radius: 10px;
     background-color: greenyellow;
-    color: black;
+    color: #616161;
     margin-left: 20px;
     padding: 12px 13px;
 }
@@ -739,8 +744,8 @@ a {
 }
 
 .reply_field {
-    background-color: black;
-    border: 1px solid black;
+    background-color: #616161;
+    border: 1px solid #616161;
     margin-bottom: 60px;
 }
 
@@ -818,7 +823,7 @@ a {
 }
 
 .reply_field_edit {
-    color: black;
+    color: #616161;
 }
 
 .reply_field_edit:hover {
@@ -830,7 +835,7 @@ a {
     border-radius: 5px;
     width: 75px;
     text-align: center;
-    background-color: #FA4630;
+    background-color: #DF2935;
 }
 
 .reply_field_form_submit {
@@ -850,11 +855,11 @@ a {
 .edit_reply {
     margin-top: 40px;
     text-align: center;
-    color: black;
+    color: #616161;
 }
 
 .edit {
-    background-color: black;
+    background-color: #616161;
     margin: 80px 0;
     border-radius: 10px;
 }
@@ -894,8 +899,9 @@ a {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .edit_form_submit:hover {
@@ -907,7 +913,7 @@ a {
     font-size: 25px;
     border-radius: 10px;
     background-color: greenyellow;
-    color: black;
+    color: #616161;
     margin-left: 20px;
     padding: 12px 47px;
 }
@@ -922,7 +928,7 @@ a {
 .listrole_page {
     margin-top: 40px;
     text-align: center;
-    color: black;
+    color: #616161;
 }
 
 .listRole_createRole {
@@ -932,7 +938,7 @@ a {
     border-radius: 10px;
     width: 210px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     margin-top: 50px;
 }
 
@@ -953,7 +959,7 @@ a {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
+    background-color: #616161;
     border-radius: 10px;
     margin: 10px 0;
     padding: 20px;
@@ -966,7 +972,7 @@ a {
 
 .listRole_box_name {
     width: 70%;
-    color: black;
+    color: #616161;
     background-color: white;
     border-radius: 10px;
     padding: 5px 5px 0 5px;
@@ -986,7 +992,7 @@ a {
     background-color: greenyellow;
     margin-right: 20px;
     padding: 3px 0 2px 0;
-    color: black;
+    color: #616161;
     width: 100px;
 }
 
@@ -999,7 +1005,7 @@ a {
     border-radius: 5px;
     width: 100px;
     text-align: center;
-    background-color: #FA4630;
+    background-color: #DF2935;
     border: 0;
     color: white;
     padding: 4px 0;
@@ -1014,7 +1020,7 @@ a {
 .createRole_page {
     margin-top: 40px;
     text-align: center;
-    color: black;
+    color: #616161;
 }
 
 .createRole_area {
@@ -1025,7 +1031,7 @@ a {
 }
 
 .createRole {
-    background-color: black;
+    background-color: #616161;
     border-radius: 10px;
     width: 600px;
 }
@@ -1060,8 +1066,9 @@ a {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .createRole_submit_input:hover {
@@ -1078,7 +1085,7 @@ a {
     margin-left: 20px;
     padding: 12px 45px;
     width: 150px;
-    color: black;
+    color: #616161;
 }
 
 .createRole_submit_back:hover {
@@ -1096,12 +1103,12 @@ a {
 }
 
 .edit_role_h1 {
-    color: black;
+    color: #616161;
 }
 
 .edit_role {
     margin-top: 50px;
-    background-color: black;
+    background-color: #616161;
     color: white;
     border-radius: 10px;
     width: 600px;
@@ -1149,8 +1156,9 @@ a {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .edit_role_nav_submit:hover {
@@ -1167,7 +1175,7 @@ a {
     margin-left: 20px;
     padding: 12px 45px;
     width: 150px;
-    color: black;
+    color: #616161;
 }
 
 .edit_role_nav_cancel:hover {
@@ -1176,7 +1184,7 @@ a {
 
 .user_role_list {
     margin: 50px 0;
-    background-color: black;
+    background-color: #616161;
     color: white;
     border-radius: 10px;
     width: 600px;
@@ -1191,7 +1199,7 @@ a {
     font-size: 25px;
     margin: 20px;
     background-color: white;
-    color: black;
+    color: #616161;
     border-radius: 10px;
 }
 
@@ -1205,7 +1213,7 @@ a {
     border-radius: 10px;
     width: 250px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     margin: 30px 0 20px 20px;
 }
 
@@ -1227,13 +1235,13 @@ a {
 }
 
 .edit_in_role_manage_h1 {
-    color: black;
+    color: #616161;
 }
 
 .edit_in_role_manage_user {
     font-size: 25px;
     margin: 50px 0;
-    background-color: black;
+    background-color: #616161;
     color: white;
     width: 600px;
     border-radius: 10px;
@@ -1246,7 +1254,7 @@ a {
 .edit_in_role_manage_user_list {
     margin: 0 20px;
     background-color: white;
-    color: black;
+    color: #616161;
     border-radius: 10px;
 }
 
@@ -1265,8 +1273,9 @@ a {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .edit_in_role_manage_user_nav_update:hover {
@@ -1283,7 +1292,7 @@ a {
     margin-left: 20px;
     padding: 12px 45px;
     width: 150px;
-    color: black;
+    color: #616161;
 }
 
 .edit_in_role_manage_user_nav_cancel:hover {
@@ -1294,7 +1303,7 @@ a {
 
 .list_users_page {
     text-align: center;
-    color: black;
+    color: #616161;
     margin-top: 40px;
 }
 
@@ -1305,7 +1314,7 @@ a {
     border-radius: 10px;
     width: 210px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     margin-top: 50px;
 }
 
@@ -1325,7 +1334,7 @@ a {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
+    background-color: #616161;
     border-radius: 10px;
     margin: 10px 0;
     padding: 20px;
@@ -1345,7 +1354,7 @@ a {
 
 .list_users_item_name_input {
     width: 70%;
-    color: black;
+    color: #616161;
     background-color: white;
     border-radius: 10px;
     padding: 5px 5px 0 5px;
@@ -1366,7 +1375,7 @@ a {
     background-color: greenyellow;
     margin-right: 20px;
     padding: 3px 0 2px 0;
-    color: black;
+    color: #616161;
     width: 100px;
 }
 
@@ -1379,7 +1388,7 @@ a {
     border-radius: 5px;
     width: 100px;
     text-align: center;
-    background-color: #FA4630;
+    background-color: #DF2935;
     border: 0;
     color: white;
     padding: 4px 0;
@@ -1399,13 +1408,13 @@ a {
 }
 
 .edit_user_h1 {
-    color: black;
+    color: #616161;
 }
 
 .edit_user {
     font-size: 25px;
     margin: 50px 0;
-    background-color: black;
+    background-color: #616161;
     color: white;
     width: 600px;
     border-radius: 10px;
@@ -1467,8 +1476,9 @@ a {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .edit_user_nav_submit:hover {
@@ -1485,7 +1495,7 @@ a {
     margin-left: 20px;
     padding: 12px 45px;
     width: 150px;
-    color: black;
+    color: #616161;
 }
 
 edit_user_nav_cancel:hover {
@@ -1494,7 +1504,7 @@ edit_user_nav_cancel:hover {
 
 .edit_user_role_list {
     margin: 20px 0;
-    background-color: black;
+    background-color: #616161;
     color: white;
     border-radius: 10px;
     width: 600px;
@@ -1508,7 +1518,7 @@ edit_user_nav_cancel:hover {
 .edit_user_role_list_member {
     margin: 0 20px;
     background-color: white;
-    color: black;
+    color: #616161;
     border-radius: 10px;
 }
 
@@ -1522,7 +1532,7 @@ edit_user_nav_cancel:hover {
     border-radius: 10px;
     width: 250px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     margin: 30px 0 20px 20px;
 }
 
@@ -1544,13 +1554,13 @@ edit_user_nav_cancel:hover {
 }
 
 .role_user_h1 {
-    color: black;
+    color: #616161;
 }
 
 .role_user {
     font-size: 25px;
     margin: 50px 0;
-    background-color: black;
+    background-color: #616161;
     color: white;
     width: 600px;
     border-radius: 10px;
@@ -1563,7 +1573,7 @@ edit_user_nav_cancel:hover {
 .role_user_list {
     margin: 0 20px;
     background-color: white;
-    color: black;
+    color: #616161;
     border-radius: 10px;
 }
 
@@ -1582,8 +1592,9 @@ edit_user_nav_cancel:hover {
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
+    border: 0;
 }
 
 .role_user_nav_update:hover {
@@ -1600,7 +1611,7 @@ edit_user_nav_cancel:hover {
     margin-left: 20px;
     padding: 12px 45px;
     width: 150px;
-    color: black;
+    color: #616161;
 }
 
 .role_user_nav_cancel:hover {
@@ -1611,12 +1622,48 @@ edit_user_nav_cancel:hover {
 footer {
     flex: 0 1 50px;
     width: 100%;
-    /*    height: 50px;*/
     background-color: black;
     color: white;
     text-align: center;
 }
 
+.footer_nav {
+    display:flex;
+    margin: 20px 50px 0 50px;
+}
+
+.footer_nav ul {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer_nav_facebook,
+.footer_nav_linkedin,
+.footer_nav_skype,
+.footer_nav_github,
+.footer_nav_resume,
+.footer_nav_inbox,
+.footer_nav_phone {
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+
+.footer_nav_facebook:hover,
+.footer_nav_linkedin:hover,
+.footer_nav_skype:hover,
+.footer_nav_github:hover,
+.footer_nav_resume:hover,
+.footer_nav_inbox:hover,
+.footer_nav_phone:hover {
+    background-color: #e65100;
+}
+
+.div-footer {
+    margin-bottom: 20px;
+}
+
+/*Error*/
 .attribute_error,
 .error_submit {
     font-size: inherit;
@@ -1648,7 +1695,7 @@ footer {
     flex-direction: column;
     align-items:center;
     margin-top: 100px;
-    color: black;
+    color: #616161;
 }
 
 .not_found_home {
@@ -1658,7 +1705,7 @@ footer {
     border-radius: 10px;
     text-align: center;
     width: 200px;
-    background-color: blue;
+    background-color: #3772FF;
     color: white;
     margin-top: 30px;
 }
