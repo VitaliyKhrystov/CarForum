@@ -1,10 +1,12 @@
-﻿@model TopicField;
+﻿@model CreateTopicViewModel;
 @{
     ViewData["Title"] = "Edit Page";
-    var fileName = Model.ImageName != null ? "Change File" : "Upload File";
-    var imagePath = "/img/UserFiles/" + Model.ImageName;
-}
 
+    var fileName = ViewBag.ImageName != null ? "Change File" : "Upload File";
+    var imagePath = "/img/UserFiles/" + ViewBag.ImageName;
+    var topicId = ViewBag.TopicId;
+    bool isSelected = false;
+}
 
 
 <div class="topic-title">
@@ -12,36 +14,38 @@
 </div>
 
 
-<form asp-controller="Topic" asp-action="EditTopic" method="post">
+<form asp-controller="Topic" asp-action="EditTopic" method="post" enctype="multipart/form-data">
     <div class="topic_edit">
         <div class="topic_edit_short">
-            <label asp-for="QuestionShort">Topic (short)</label> <span asp-validation-for="QuestionShort" class="attribute_error"></span> <br>
-            <input asp-for="QuestionShort" type="text" maxlength="80" value="@Model.QuestionShort" /> <br>
+            <label asp-for="TopicShort">Topic (short)</label> <span asp-validation-for="TopicShort" class="attribute_error"></span> <br>
+            <input asp-for="TopicShort" type="text" maxlength="80" value="@Model.TopicShort" /> <br>
 
         </div>
         <div class="topic_edit_extension">
-            <label asp-for="QuestionExtension">Topic (extension)</label> <span asp-validation-for="QuestionExtension" class="attribute_error"></span> <br>
-            <textarea rows='1' asp-for="QuestionExtension" value="@Model.QuestionExtension"></textarea> <br>
+            <label asp-for="TopicExtension">Topic (extension)</label> <span asp-validation-for="TopicExtension" class="attribute_error"></span> <br>
+            <textarea rows='1' asp-for="TopicExtension" value="@Model.TopicExtension"></textarea> <br>
         </div>
 
-        @if (Model.ImageName != null)
+        @if (@ViewBag.ImageName != null)
         {
             <div class="edit_topic_file">
-                <a href="@imagePath"> <img class="edit_topic_file_image" src="@imagePath" alt="Image" /></a>    
+                <a href="@imagePath"> <img class="edit_topic_file_image" src="@imagePath" alt="Image" /></a>
             </div>
+            <label class="edit_topic_file_delete">Delete File  <input type="checkbox" name="isSelected" asp-for="@isSelected" /></label>
         }
 
-        <label class="edit_topic_add_file">
-            <span> @fileName </span>
-            <input class="topic_add_file_upload" type="file" asp-for="ImageName" accept=".jpg, .jpeg, .png" hidden onchange="uploadFile(this)" />
-        </label>
+        <div>
+            <label class="edit_topic_add_file">
+                <span> @fileName </span>
+                <input class="topic_add_file_upload" type="file" asp-for="UploadFile" accept=".jpg, .jpeg, .png" hidden onchange="uploadFile(this)" />
+            </label>
+        </div>
+       
 
         <div class="topic_edit_nav">
+            <input type="text" name="topicId" value="@topicId" hidden />
             <input class="topic_edit_nav_save" type="submit" value="Save Changes" />
             <a class="topic_edit_nav_back" asp-controller="Home" asp-action="Index">Back</a>
-            <input asp-for="Id" hidden />
-            <input asp-for="UserId" hidden />
-            <input asp-for="TopicData" hidden />
         </div>
     </div>
 </form>

@@ -498,6 +498,8 @@ a {
 }
 
 .topic_edit {
+    display:flex;
+    flex-direction: column;
     margin: 75px 0 30px 0;
     background-color: black;
     border-radius: 10px;
@@ -540,14 +542,36 @@ a {
     border-radius: 10px;
 }
 
+.edit_topic_file_delete {
+    margin: 20px 0 20px 30px;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    background-color: #FA4630;
+    border: 0;
+    color: white;
+    padding: 5px 0;
+}
+
+.edit_topic_file_delete input {
+    margin-left: 7px;
+}
+
+.edit_topic_file_delete:hover {
+    color: darkblue;
+}
+
+
 .edit_topic_add_file {
+    display: flex;
     margin: 20px 0 30px 30px;
     display: inline-flex;
     position: relative;
     align-items: center;
     justify-content: center;
     height: 53px;
-    padding: 8px 35px 0 35px;
+    padding: 8px 10px 0 10px;
     overflow: hidden;
     color: black;
     cursor: pointer;
@@ -560,6 +584,7 @@ a {
     text-transform: uppercase;
     text-align: center;
     background-color: white;
+    min-width: 200px;
 }
 
 .edit_topic_add_file:hover {
@@ -652,7 +677,7 @@ a {
 
 .reply_area_text {
     font-size: 25px;
-    padding: 0 10px 0 10px;
+    padding: 2px 10px 0 10px;
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
@@ -962,6 +987,361 @@ a {
 .listRole_box_action_delete_submit:hover {
     color: darkblue;
 }
+
+/*Create Role*/
+
+.createRole_page {
+    margin-top: 40px;
+    text-align: center;
+    color: black;
+}
+
+.createRole_area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 0 30px 0
+}
+
+.createRole {
+    background-color: black;
+    border-radius: 10px;
+    width: 600px;
+}
+
+.createRole_name {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+}
+
+.register_email_label {
+    font-size: 25px;
+}
+
+.register_email_input {
+    font-size: 25px;
+    width: 90%;
+    border-radius: 10px;
+    padding: 3px 5px 0 5px;
+}
+
+.createRole_submit {
+    margin: 20px;
+    font-size: 25px;
+}
+
+.createRole_submit_input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+}
+
+.createRole_submit_input:hover {
+    color: aqua;
+}
+
+.createRole_submit_back {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    border-radius: 5px;
+    width: 75px;
+    text-align: center;
+    background-color: greenyellow;
+    margin-left: 20px;
+    padding: 12px 45px;
+    width: 150px;
+    color: black;
+}
+
+.createRole_submit_back:hover {
+    color: blueviolet;
+}
+
+
+/*Edit Role*/
+
+.edit_role_main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.edit_role_h1 {
+    color: black;
+}
+
+.edit_role {
+    margin-top: 50px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    width: 600px;
+}
+
+.edit_role_id {
+    display: flex;
+    flex-direction: row;
+    font-size: 25px;
+    padding: 20px;
+}
+
+.edit_role_id_input {
+    margin-left: 12px;
+    background-color: inherit;
+    border: 0;
+    color: white;
+    width: 450px;
+}
+
+.edit_role_name {
+    display: flex;
+    flex-direction: row;
+    font-size: 25px;
+    padding: 0 20px;
+}
+
+.edit_role_name_input {
+    margin-left: 12px;
+    border-radius: 10px;
+    width: 330px;
+    padding: 8px 10px 0 10px;
+    height: 32px;
+}
+
+.edit_role_nav {
+    margin: 20px;
+    font-size: 25px;
+}
+
+.edit_role_nav_submit {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+}
+
+.edit_role_nav_submit:hover {
+    color: aqua;
+}
+
+.edit_role_nav_cancel {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    border-radius: 5px;
+    width: 75px;
+    text-align: center;
+    background-color: greenyellow;
+    margin-left: 20px;
+    padding: 12px 45px;
+    width: 150px;
+    color: black;
+}
+
+.edit_role_nav_cancel:hover {
+    color: blueviolet;
+}
+
+.user_role_list {
+    margin: 50px 0;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    width: 600px;
+}
+
+.user_role_list_h2 {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.user_role_list_member {
+    font-size: 25px;
+    margin: 20px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+}
+
+.user_role_list_member_name {
+    padding: 10px 20px;
+}
+
+.user_role_list_nav_div {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    background-color: blue;
+    margin: 30px 0 20px 20px;
+}
+
+.user_role_list_nav_add {
+    color: white;
+}
+
+.user_role_list_nav_add:hover {
+    color: aqua;
+}
+
+/*EditUserRole*/
+
+.edit_in_role_manage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.edit_in_role_manage_h1 {
+    color: black;
+}
+
+.edit_in_role_manage_user {
+    font-size: 25px;
+    margin: 50px 0;
+    background-color: black;
+    color: white;
+    width: 600px;
+    border-radius: 10px;
+}
+
+.edit_in_role_manage_data {
+    margin: 20px;
+}
+
+.edit_in_role_manage_user_list {
+    margin: 0 20px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+}
+
+.edit_in_role_manage_user_list_item {
+    padding: 10px 10px 5px 10px;
+}
+
+.edit_in_role_manage_user_nav {
+    margin: 30px 20px 20px 20px;
+}
+
+.edit_in_role_manage_user_nav_update {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+}
+
+.edit_in_role_manage_user_nav_update:hover {
+    color:aqua;
+}
+
+.edit_in_role_manage_user_nav_cancel {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    border-radius: 5px;
+    width: 75px;
+    text-align: center;
+    background-color: greenyellow;
+    margin-left: 20px;
+    padding: 12px 45px;
+    width: 150px;
+    color: black;
+}
+
+.edit_in_role_manage_user_nav_cancel:hover {
+    color: blueviolet;
+}
+
+
+/*ManageUserRole*/
+.role_user_manage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.role_user_h1 {
+    color: black;
+}
+
+.role_user {
+    font-size: 25px;
+    margin: 50px 0;
+    background-color: black;
+    color: white;
+    width: 600px;
+    border-radius: 10px;
+}
+
+.role_user_data {
+    margin: 20px;
+}
+
+.role_user_list {
+    margin: 0 20px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+}
+
+.role_user_list_item {
+    padding: 10px 10px 5px 10px;
+}
+
+.role_user_nav {
+    margin: 30px 20px 20px 20px;
+}
+
+.role_user_nav_update {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    padding: 8px 0;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+}
+
+.role_user_nav_update:hover {
+    color:aqua;
+}
+
+.role_user_nav_cancel {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    border-radius: 5px;
+    width: 75px;
+    text-align: center;
+    background-color: greenyellow;
+    margin-left: 20px;
+    padding: 12px 45px;
+    width: 150px;
+    color: black;
+}
+
+.role_user_nav_cancel:hover {
+    color: blueviolet;
+}
+
 /*.forum_topic_body td:nth-child(3),
 .forum_topic_body td:nth-child(4) {
     font-size: 12px;

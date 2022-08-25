@@ -3,31 +3,35 @@
     ViewData["Title"] = "Edit Role";
 }
 
-<div class="edit_role">
+<div class="edit_role_main">
     <h1 class="edit_role_h1">Edit Role</h1>
-    <div class="attribute_error" asp-validation-summary="All"></div>
-    <form class="edit_role_form" asp-controller="Administration" asp-action="EditRole" method="post">
-        <div class="edit_role_id">
-            <label class="edit_role_id_label" asp-for="Id">Id:</label>
-            <input class="edit_role_id_input" type="text" asp-for="Id" value="@Model.Id" disabled />
-        </div>
-        <div class="edit_role_name">
-            <label class="edit_role_name_label" asp-for="Name">Role Name:</label>
-            <input class="edit_role_name_input" type="text" asp-for="Name" value="@Model.Name" />
-            <span class="attribute_error" asp-validation-for="Name"></span>
-        </div>
-        <div class="edit_role_nav">
-            <input class="edit_role_nav_submit" type="submit" value="Update" />
-            <a class="edit_role_nav_cancel" asp-action="ListRoles">Cancel</a>
-        </div>
-    </form>
 
-</div>
+    <div class="edit_role">
+        <div class="attribute_error" asp-validation-summary="All"></div>
+        <form class="edit_role_form" asp-controller="Administration" asp-action="EditRole" method="post">
+            <div class="edit_role_id">
+                <label class="edit_role_id_label" asp-for="Id">Id:</label>
+                <input class="edit_role_id_input" type="text" asp-for="Id" value="@Model.Id" disabled />
+            </div>
+            <div class="edit_role_name">
+                <label class="edit_role_name_label" asp-for="Name">Role Name:</label>
+                <input class="edit_role_name_input" type="text" asp-for="Name" value="@Model.Name" />
+                <span class="attribute_error" asp-validation-for="Name"></span>
+            </div>
+            <div class="edit_role_nav">
+                <input class="edit_role_nav_submit" type="submit" value="Update" />
+                <a class="edit_role_nav_cancel" asp-action="ListRoles">Back</a>
+            </div>
+        </form>
 
-<div class="user_role_list">
-    <h2 class="user_role_list_h2">Users in this role</h2>
+    </div>
 
-    <div class="user_role_list_member">
+    <div class="user_role_list">
+        <div class="user_role_list_h2">
+            <h2>Users in this role</h2>
+        </div>
+       
+        <div class="user_role_list_member">
             @if (Model.Users.Any())
             {
                 @foreach (var user in Model.Users)
@@ -40,8 +44,12 @@
             {
                 <p class="user_role_list_member_name">There is no any member in this role</p>
             }
-    </div>
-    <div class="user_role_list_nav_div">
-        <a class="user_role_list_nav_add" asp-controller="Administration" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id">Add or Remove Users</a>
+        </div>
+        <div class="user_role_list_nav_div">
+            <a class="user_role_list_nav_add" asp-controller="Administration" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id">Add or Remove Users</a>
+        </div>
     </div>
 </div>
+
+
+

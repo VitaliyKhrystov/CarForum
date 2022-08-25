@@ -89,34 +89,64 @@ namespace CarForum.Controllers
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
-            //IFormFile file = new FormFile() { FileName = topicField.ImageName}
-
-            //CreateTopicViewModel model = new CreateTopicViewModel()
-            //{
-            //    TopicShort = topicField.QuestionShort,
-            //    TopicExtension = topicField.QuestionExtension,
-            //    UploadFile = 
-            //};
-
-
             if (topicField != null)
             {
-                return View(topicField);
+                var model = new CreateTopicViewModel()
+                {
+                    TopicShort = topicField.QuestionShort,
+                    TopicExtension = topicField.QuestionExtension
+                };
+
+                ViewBag.ImageName = topicField.ImageName;
+                ViewBag.TopicId = topicField.Id;
+
+                return View(model);
             }
 
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditTopic(TopicField _topicField)
+        public async Task<ActionResult> EditTopic(CreateTopicViewModel model, int topicId, bool isSelected)
         {
-            dataManager.EFTopicFields.UpdateTopic(_topicField);
 
+            if (ModelState.IsValid)
+            {
+                User user = await userManager.FindByNameAsync(User.Identity.Name);
+                topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(topicId);
 
+                if (isSelected || (topicField.ImageName != null && model.UploadFile != null))
+                {
+                    string path = Path.Combine(env.WebRootPath, "img/UserFiles", topicField.ImageName);
+                    System.IO.File.Delete(path);
+                    topicField.ImageName = null;
+                    dataManager.EFTopicFields.UpdateTopic(topicField);
+                    await dataManager.EFTopicFields.SaveTopicAsync();
+                }
 
+                if (model.UploadFile != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + "-" + model.UploadFile.FileName;
+                    string path = Path.Combine(env.WebRootPath, "img/UserFiles", fileName);
+                    using (var filestrem = new FileStream(path, FileMode.Create))
+                    {
+                        await model.UploadFile.CopyToAsync(filestrem);
+                    }
 
+                    topicField.ImageName = fileName;
+                }
 
-            await dataManager.EFTopicFields.SaveTopicAsync();
+                if ( (topicField.QuestionShort != model.TopicShort) || (topicField.QuestionExtension != model.TopicExtension) || (model.UploadFile != null) )
+                {
+                    topicField.QuestionShort = model.TopicShort;
+                    topicField.QuestionExtension = model.TopicExtension;
+                    topicField.User = user;
+                    topicField.TopicData = DateTime.Now;
+                
+                    dataManager.EFTopicFields.UpdateTopic(topicField);
+                    await dataManager.EFTopicFields.SaveTopicAsync();
+                } 
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -134,6 +164,10 @@ namespace CarForum.Controllers
             }
 
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
+
+            string path = Path.Combine(env.WebRootPath, "img/UserFiles", topicField.ImageName);
+            System.IO.File.Delete(path);
+              
             dataManager.EFTopicFields.DeleteTopic(topicField);
             await dataManager.EFTopicFields.SaveTopicAsync();
 
