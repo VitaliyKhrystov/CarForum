@@ -165,8 +165,11 @@ namespace CarForum.Controllers
 
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
-            string path = Path.Combine(env.WebRootPath, "img/UserFiles", topicField.ImageName);
-            System.IO.File.Delete(path);
+            if (topicField.ImageName != null)
+            {
+                string path = Path.Combine(env.WebRootPath, "img/UserFiles", topicField.ImageName);
+                System.IO.File.Delete(path);
+            }
               
             dataManager.EFTopicFields.DeleteTopic(topicField);
             await dataManager.EFTopicFields.SaveTopicAsync();

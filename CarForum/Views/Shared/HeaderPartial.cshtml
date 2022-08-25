@@ -2,36 +2,43 @@
     <nav class="header_nav">
         <ul class="header_nav_left">
             <li><a href="/">Home page</a></li>
-            <li><a href="/">Contacts</a></li>
             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
                 <li><a asp-controller="Administration" asp-action="ListUsers">Manage Users</a></li>
                 <li><a asp-controller="Administration" asp-action="ListRoles">Manage Roles</a></li>
             }
         </ul>
-            <ul class="header_nav_right">
-                @if (User.Identity.IsAuthenticated)
+        <ul class="header_nav_right">
+            <li><a href="https://facebook.com/vitalik.khristov"><img class="nav_facebook" src="~/img/iconcs/facebook-4-24.png" alt="facebook" /></a></li>
+            <li><a href="https://linkedin.com/in/khrystov-vitalii-58946b131"><img class="nav_linkedin" src="~/img/iconcs/linkedin-4-24.png" alt="linkedin" /></a></li>
+            <li><a href="skype:vitalik_khristov?call"><img class="nav_skype" src="~/img/iconcs/skype-4-24.png" alt="skype" /></a></li>
+            <li><a href="https://github.com/VitaliyKhrystov"><img class="nav_github" src="~/img/iconcs/github-10-24.png" alt="github" /></a></li>
+            <li><a href="https://celadon-sopapillas-f62575.netlify.app/"><img class="nav_resume" src="~/img/iconcs/resume-link-24.gif" alt="resume" /></a></li>
+            <li><a href="mailto:vitalik_khristov@ukr.net"><img class="nav_inbox" src="~/img/iconcs/inbox-8-24.png" alt="inbox" /></a></li>
+            <li><a href="tel:@Config.CompanyPhoneShort"><img class="nav_phone" src="~/img/iconcs/phone-30-24.png" alt="phone" /></a></li>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                string name = User.Identity.Name;
+                int index = name.IndexOf("@");
+                @if (index > 0)
                 {
-                    string name = User.Identity.Name;
-                    int index = name.IndexOf("@");
-                    @if (index > 0)
-                    {
-                        int interval = name.Length - index;
-                        name = name.Remove(index, interval);
-                    }
-      
-                    <li>@name.ToUpper()</li>
-                    <li>
-                        <form asp-controller="Account" asp-action="Logout" method="post">
-                            <input class="header_nav_right_exit" type="submit" name="name" value="Logout" />
-                        </form>
-                    </li>
+                    int interval = name.Length - index;
+                    name = name.Remove(index, interval);
                 }
-                else
-                {
-                    <li><a class="header_nav_right_login" asp-controller="Account" asp-action="Login">Login</a></li>
-                    <li><a class="header_nav_right_register" asp-controller="Account" asp-action="Register">Register</a></li>
-                }
-            </ul>
+
+                <li>@name.ToUpper()</li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <input class="header_nav_right_exit" type="submit" name="name" value="Logout" />
+                    </form>
+                </li>
+            }
+            else
+            {
+                <li><a class="header_nav_right_login" asp-controller="Account" asp-action="Login">Login</a></li>
+                <li><a class="header_nav_right_register" asp-controller="Account" asp-action="Register">Register</a></li>
+            }
+        </ul>
     </nav>
 </header>

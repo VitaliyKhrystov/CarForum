@@ -3,77 +3,86 @@
     ViewData["Title"] = "Edit User";
 }
 
-<div class="edit_user">
-    <h1 class="edit_user_h1">Edit User</h1>
-    <div class="attribute_error" asp-validation-summary="All"></div>
-    <form class="edit_user_form" asp-controller="Administration" asp-action="EditUser" method="post">
+<div class="edit_user_page">
 
-        <div class="edit_user_id">
-            <label class="edit_user_id_label" asp-for="Id">Id:</label>
-            <input class="edit_user_id_input" asp-for="Id" value="@Model.Id" disabled />
-            <input class="edit_user_id_input" asp-for="Id" value="@Model.Id" hidden />
-        </div>
+    <div class="edit_user_h1">
+        <h1>Edit User</h1>
+    </div>
 
-        <div class="edit_user_name">
-            <label class="edit_user_name_label" asp-for="NameUser">User Name:</label>
-            <input class="edit_user_name_input" asp-for="NameUser" value="@Model.NameUser" />
-            <span class="attribute_error" asp-validation-for="NameUser"></span>
-        </div>
-        <div class="edit_user_email">
-            <label class="edit_user_email_label" asp-for="Email">Email:</label>
-            <input class="edit_user_email_input" asp-for="Email" value="@Model.Email" />
-            <span class="attribute_error" asp-validation-for="Email"></span>
-        </div>
+
+    <div class="edit_user">
+        <div class="attribute_error" asp-validation-summary="All"></div>
+        <form class="edit_user_form" asp-controller="Administration" asp-action="EditUser" method="post">
+
+            <div class="edit_user_id">
+                <label class="edit_user_id_label" asp-for="Id">Id:</label>
+                <input class="edit_user_id_input" asp-for="Id" value="@Model.Id" disabled />
+                <input class="edit_user_id_input" asp-for="Id" value="@Model.Id" hidden />
+            </div>
+
+            <div class="edit_user_name">
+                <label class="edit_user_name_label" asp-for="NameUser">User Name:</label>
+                <input class="edit_user_name_input" asp-for="NameUser" value="@Model.NameUser" />
+                <span class="attribute_error" asp-validation-for="NameUser"></span>
+            </div>
+            <div class="edit_user_email">
+                <label class="edit_user_email_label" asp-for="Email">Email:</label>
+                <input class="edit_user_email_input" asp-for="Email" value="@Model.Email" />
+                <span class="attribute_error" asp-validation-for="Email"></span>
+            </div>
             <input asp-for="Claims" value="@Model.Claims" hidden />
             <input asp-for="Roles" value="@Model.Roles" hidden />
-        <div class="edit_user_nav">
-            <input class="edit_user_nav_submit" type="submit" value="Update" />
-            <a class="edit_user_nav_cancel" asp-action="ListUsers">Cancel</a>
-        </div>
-    </form>
+            <div class="edit_user_nav">
+                <input class="edit_user_nav_submit" type="submit" value="Update" />
+                <a class="edit_user_nav_cancel" asp-action="ListUsers">Back</a>
+            </div>
+        </form>
 
-</div>
+    </div>
 
-<div class="user_role_list">
-    <h2 class="user_role_list_h2">User Roles</h2>
 
-    <div class="user_role_list_member">
-        @if (Model.Roles.Any())
-        {
-            @foreach (var role in Model.Roles)
+
+    <div class="edit_user_role_list">
+        <h2 class="edit_user_role_list_h2">User Roles</h2>
+
+        <div class="edit_user_role_list_member">
+            @if (Model.Roles.Any())
             {
-                <p class="user_role_list_member_name">@role</p>
+                @foreach (var role in Model.Roles)
+                {
+                    <p class="edit_user_role_list_member_name">@role</p>
+                }
+
             }
-
-        }
-        else
-        {
-            <p class="user_role_list_member_name">There is no any role</p>
-        }
-    </div>
-    <div class="user_role_list_nav_div">
-        <a class="user_role_list_nav_add" asp-controller="Administration" asp-action="ManageUserRole" asp-route-userId="@Model.Id">Manage Roles</a>
-    </div>
-</div>
-
-<div class="user_role_list">
-    <h2 class="user_role_list_h2">User Claims</h2>
-
-    <div class="user_role_list_member">
-        @if (Model.Claims.Any())
-        {
-            @foreach (var claim in Model.Claims)
-            { 
-                <p class="user_role_list_member_name">@claim</p>
+            else
+            {
+                <p class="edit_user_role_list_member_name">There is no any role</p>
             }
-
-        }
-        else
-        {
-            <p class="user_role_list_member_name">There is no any claim</p>
-        }
+        </div>
+        <div class="edit_user_role_list_nav_div">
+            <a class="edit_user_role_list_nav_add" asp-controller="Administration" asp-action="ManageUserRole" asp-route-userId="@Model.Id">Manage Roles</a>
+        </div>
     </div>
-    <div class="user_role_list_nav_div">
-        <a class="user_role_list_nav_add" asp-controller="Administration" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id">Manage Claims</a>
+
+    <div class="edit_user_role_list">
+        <h2 class="edit_user_role_list_h2">User Claims</h2>
+
+        <div class="edit_user_role_list_member">
+            @if (Model.Claims.Any())
+            {
+                @foreach (var claim in Model.Claims)
+                {
+                    <p class="edit_user_role_list_member_name">@claim</p>
+                }
+
+            }
+            else
+            {
+                <p class="edit_user_role_list_member_name">There is no any claim</p>
+            }
+        </div>
+        <div class="edit_user_role_list_nav_div">
+            <a class="edit_user_role_list_nav_add" asp-controller="Administration" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id">Manage Claims</a>
+        </div>
     </div>
 </div>
