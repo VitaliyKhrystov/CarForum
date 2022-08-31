@@ -89,6 +89,7 @@ namespace CarForum.Controllers
         {
             topicField = await dataManager.EFTopicFields.GetTopicByIdAsync(id);
 
+                  
             if (topicField != null)
             {
                 var model = new CreateTopicViewModel()

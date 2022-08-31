@@ -130,7 +130,14 @@ a {
 
 .forum-title {
     text-align: center;
+}
+
+.forum-title-homepage {
     color: #616161
+}
+
+.forum-title-homepage:hover {
+    color: #484747;
 }
 
 .topic_add_search {

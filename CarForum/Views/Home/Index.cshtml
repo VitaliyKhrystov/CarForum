@@ -4,10 +4,12 @@
 @{
     ViewData["Title"] = "Home Page";
     List<Response> responses;
+
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 <div class="forum">
-    <h1 class="forum-title">@Config.CompanyName</h1>
+    <h1 class="forum-title"><a class="forum-title-homepage" asp-action="Index">@Config.CompanyName</a> </h1>
 </div>
 
 <div class="topic_add_search">
@@ -89,15 +91,19 @@
                                 <a class="forum_topic_body_nav_reply" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">Reply</a>
                             </td>
 
-                            <td>
-                                <a class="forum_topic_body_nav_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
-                            </td>
+                                @if ( (User.IsInRole("Admin")) || (currentUserId == topic.UserId))
+                                {
+                                    <td>
+                                        <a class="forum_topic_body_nav_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
+                                    </td>
 
-                            <td>
-                                <form class="forum_topic_body_nav_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
-                                    <button class="forum_topic_body_nav_form_submit" type="submit" onclick="return confirm('Are you sure you want to delete topic: @topic.QuestionShort')">Delete</button>
-                                </form>
-                            </td>
+                                    <td>
+                                        <form class="forum_topic_body_nav_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
+                                            <button class="forum_topic_body_nav_form_submit" type="submit" onclick="return confirm('Are you sure you want to delete topic: @topic.QuestionShort')">Delete</button>
+                                        </form>
+                                    </td>
+                                }
+                          
                         </tr>
                     </table>
                 </td>

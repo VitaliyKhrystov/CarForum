@@ -3,6 +3,7 @@
     ViewData["Title"] = "Reply";
     int id = Model.Topic.Id;
     var imagePath = "~/img/UserFiles/" + Model.Topic.ImageName;
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 
@@ -83,14 +84,19 @@
                     <td class="reply_field_action">
                         <table class="reply_field_body_table">
                             <tr class="reply_field_body_action">
-                                <td>
-                                    <a class="reply_field_edit" asp-controller="Topic" asp-action="EditReply" asp-route-id="@reply.Id">Edit</a>
-                                </td>
-                                <td>
-                                    <form class="reply_field_form" asp-action="DeleteReply" asp-route-id="@reply.Id" method="post">
-                                        <button class="reply_field_form_submit" type="submit">Delete</button>
-                                    </form>
-                                </td>
+
+                                @if ((User.IsInRole("Admin")) || (currentUserId == reply.UserId))
+                                {
+                                    <td>
+                                        <a class="reply_field_edit" asp-controller="Topic" asp-action="EditReply" asp-route-id="@reply.Id">Edit</a>
+                                    </td>
+                                    <td>
+                                        <form class="reply_field_form" asp-action="DeleteReply" asp-route-id="@reply.Id" method="post">
+                                            <button class="reply_field_form_submit" type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                }
+
                             </tr>
                         </table>
                     </td>
