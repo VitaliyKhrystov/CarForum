@@ -10,10 +10,17 @@
     <h1 class="forum-title">@Config.CompanyName</h1>
 </div>
 
-<div class="forum_add">
-    <a class="forum_add_topic" asp-controller="Topic" asp-action="CreateTopic">Add new topic</a>
+<div class="topic_add_search">
+    <div class="forum_add">
+        <a class="forum_add_topic" asp-controller="Topic" asp-action="CreateTopic">Add new topic</a>
+    </div>
+    <div class="topic_search">
+        <form asp-action="Index" method="get"> 
+            <input class="topic_search_field" type="search" name="SearchTopic" placeholder="Enter Topic" />
+            <input class="topic_search_submit" type="submit" value="Search" />
+        </form>
+    </div>
 </div>
-
 
 
 <div class="forum_topic">
@@ -99,92 +106,3 @@
     </table>
 
 </div>
-
-@*<div class="forum_topic">
-
-        <table>
-            <tr class="forum_topic_hat">
-                <th>Topic</th>
-                <th>User</th>
-                <th>Post</th>
-                <th>Last Update</th>
-                <th>Actions</th>
-            </tr>
-            @foreach (var topic in Model.Topics)
-            {
-
-                User user = await userManager.FindByIdAsync(topic.UserId);
-
-                <tr>
-                    <td>
-                        <a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
-                    </td>
-
-                    <td>
-                        <p>@user.UserName</p>
-                    </td>
-
-                    <td>
-                        <p>@topic.TopicData</p>
-                    </td>
-
-                    <td>
-                        <p>@topic.TopicData</p>
-                    </td>
-
-                    <td>
-                        <table>
-                            <tr>
-                                <td>
-                                    <a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">View</a>
-                                </td>
-
-                                <td>
-                                    <a class="forum_topic_list_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
-                                </td>
-
-                                <td>
-                                    <form class="forum_topic_list_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
-                                        <button class="forum_topic_list_form_submit" type="submit">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            }
-        </table>
-
-    </div>*@
-
-
-
-
-
-@*<div class="forum_topic">
-        <p class="forum_topic_title">Topics list</p>
-
-        @foreach (var topic in Model)
-        {
-            <div class="forum_topic_list">
-                <div class="forum_topic_list_div">
-
-                    <p>@topic.UserId</p>
-                    @{
-                        User user = await userManager.FindByIdAsync(topic.UserId);
-                        <p>@user.UserName</p>
-                    }
-
-
-                    <a class="forum_topic_list_div_a" asp-controller="Topic" asp-action="CreateReply" asp-route-id="@topic.Id">@topic.QuestionShort</a>
-                </div>
-                <a class="forum_topic_list_edit" asp-controller="Topic" asp-action="EditTopic" asp-route-id="@topic.Id">Edit</a>
-
-                <form class="forum_topic_list_form" asp-controller="Topic" asp-action="DeleteTopic" asp-route-id="@topic.Id" method="post">
-                    <button class="forum_topic_list_form_submit" type="submit">Delete</button>
-                </form>
-            </div>
-        }
-
-    </div>*@
-

@@ -48,6 +48,17 @@ namespace CarForum.Domain.Repositories.EntityFrameWork
             }
         }
 
+        public IQueryable<TopicField> Search(string searchTopic)
+        {
+            if (String.IsNullOrEmpty(searchTopic))
+            {
+                return GetTopic();
+            }
+
+            return GetTopic().Where(t => t.QuestionShort.Contains(searchTopic) ||
+                                         t.QuestionExtension.Contains(searchTopic));
+        }
+
         private bool disposed = false;
 
         public virtual void Dispose(bool disposing)
@@ -67,5 +78,7 @@ namespace CarForum.Domain.Repositories.EntityFrameWork
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+  
     }
 }

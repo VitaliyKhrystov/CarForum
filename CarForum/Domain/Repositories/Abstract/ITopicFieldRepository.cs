@@ -12,5 +12,6 @@ namespace CarForum.Domain.Repositories.Abstract
         Task<TopicField> GetTopicByIdAsync(int id);
         Task SaveTopicAsync();
         void DeleteTopic(TopicField entity);
+        IQueryable<TopicField> Search(string searchTopic);
     }
 }
